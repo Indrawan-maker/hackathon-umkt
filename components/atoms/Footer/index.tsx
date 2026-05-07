@@ -42,7 +42,7 @@ export default function Footer () {
             <a href="#" rel="noreferrer" target="_blank" className="text-white transition hover:text-slate-400">
               <span className="sr-only">Tiktok</span>
               <div className="">
-                <span className=""><AiFillTikTok className="w-10 h-10"/></span>
+                <span className=""><AiFillTikTok className="w-11 h-11"/></span>
               </div>
             </a>
           </li>
