@@ -1,0 +1,30 @@
+export default function ServiceSelectorAiForm() {
+
+    return (
+        <>
+            <main>
+                <div className="flex px-6 md:p-0 gap-1 md:gap-0">
+                    <ul className="flex justify-center items-center mr-4 ">
+                        <li className="relative grid justify-center gap-2 md:p-7 py-6">
+                            <div className="absolute inset-0 flex justify-center">
+                                <div className="w-[1px] bg-white"></div>
+                            </div>
+                            <div className="relative z-10 rounded-full p-0 h-12 md:p-0 w-12" >
+                                <Image
+                                    src={imageProps}
+                                    alt="uinsi"
+                                    className="rounded-full w-full h-full  md:w-12 md:h-12"
+                                />
+                            </div>
+                        </li>
+                    </ul>
+                    <div className="grid p-2 md:p-3 items-center justify-center">
+                        <p className="text-gray-400 text-sm ">{dateProps}</p>
+                        <h1 className="text-white font-bold">{titleProps}</h1>
+                        <p className="text-gray-400 text-sm">{descProps}</p>
+                    </div>
+                </div>
+            </main>
+        </>
+    )
+}

@@ -1,0 +1,23 @@
+// import Icon1 from "./images/uinsi-icon.webp";
+import Icon1 from "./images/uinsi.jpg";
+import Icon2 from "./images/semar.png";
+import { Studies } from '@/components/atoms/Studies';
+
+export default function ServiceSelectorValue({ setActiveTab }: { setActiveTab: string }) {
+    return (
+ <div>
+            <div className="flex md:grid md:w-full md:h-auto border-2 rounded-xl border-white">
+                {
+                    setActiveTab === 'work' ?
+                        <>
+                            <Studies imageProps={Icon2} dateProps="2025 - now" titleProps="SEMAR" descProps="Working on freelance projects focusing on web development" />
+                        </>
+                        :
+                        <>
+                            <Studies imageProps={Icon1} dateProps="August 2024 - August 2028" titleProps="UINSI" descProps="Undergraduate in Information System" />
+                        </>
+                }
+            </div>
+        </div>
+    )
+}
