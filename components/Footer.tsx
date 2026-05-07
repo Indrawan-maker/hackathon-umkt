@@ -1,6 +1,8 @@
 import Image from "next/image";
 import logo from '@/public/images/home-spa-logo.webp';
 import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
+import { AiFillTikTok } from "react-icons/ai";
+import { GiCheckMark } from "react-icons/gi";
 
 export default function Footer () {
     return (
@@ -12,8 +14,10 @@ export default function Footer () {
             <Image src={logo} width={200} height={250} quality={70}  alt="spa logo" />
         </div>
 
-        <p className="mt-6 max-w-md text-center leading-relaxed text-white sm:max-w-xs sm:text-left">
+        <p className="mt-6 max-w-md text-center mx-auto sm:mx-0 leading-relaxed text-white sm:max-w-xs sm:text-left">
+            <span>
            Satu-satunya home spa di Samarinda dengan ranjang pijat sungguhan. Nikmati pijat tubuh yang menenangkan, manicure dengan lebih dari 50 pilihan warna kuku, musik spa, dan aromaterapi langsung di rumah Anda. 
+            </span>
         </p>
 
         <ul className="mt-8 flex justify-center gap-6 sm:justify-start md:gap-8">
@@ -34,74 +38,77 @@ export default function Footer () {
               </div>
             </a>
           </li>
+          <li>
+            <a href="#" rel="noreferrer" target="_blank" className="text-white transition hover:text-slate-400">
+              <span className="sr-only">Tiktok</span>
+              <div className="">
+                <span className=""><AiFillTikTok className="w-10 h-10"/></span>
+              </div>
+            </a>
+          </li>
         </ul>
       </div>
 
       <div className="grid grid-cols-1 sm:flex sm:gap-32 w-full">
         <div className="text-center sm:text-left">
-          <p className="text-lg font-medium text-gray-200">Area Layanan</p>
+          <p className="text-xl font-medium text-gray-200">Area Layanan</p>
 
-          <ul className="mt-8 space-y-4 text-sm">
+          <ul className="mt-8 space-y-4 text-md">
             <li>
-              <a className="text-white transition hover:text-slate-400" href="#">
-                v pijat panggilan Bandung
+              <a className="text-white flex gap-2 transition hover:text-slate-400" href="#">
+                <GiCheckMark /> pijat panggilan Bandung
               </a>
             </li>
 
             <li>
-              <a className="text-white transition hover:text-slate-400" href="#">
-                v Kota Samarinda
+              <a className="text-white flex gap-2 transition hover:text-slate-400" href="#">
+                <GiCheckMark />  Kota Samarinda
               </a>
             </li>
 
             <li>
-              <a className="text-white transition hover:text-slate-400" href="#">
-                v Kabupaten Samarinda Seberang
+              <a className="text-white flex gap-2 transition hover:text-slate-400" href="#">
+                <GiCheckMark />  Kabupaten Samarinda Seberang
               </a>
             </li>
 
-            <li> 
-              <a className="text-white transition hover:text-slate-400" href="#"> Careers </a>
-            </li>
           </ul>
         </div>
 
         <div className="text-center sm:text-left ">
-          <p className="text-lg font-medium text-gray-200">Price List & Reservasi</p>
-          <ul className="mt-8 space-y-4 text-sm">
+          <p className="text-xl font-medium text-gray-200">Price List & Reservasi</p>
+          <ul className="mt-8 space-y-4 text-md">
             <li>
-              <a className="text-white transition hover:text-slate-400" href="#">
-               v Reservasi
+              <a className="text-white flex gap-2 transition hover:text-slate-400" href="#">
+               <GiCheckMark />  Reservasi
               </a>
             </li>
 
             <li>
-              <a className="text-white transition hover:text-slate-400" href="#">
-               v Price List
+              <a className="text-white flex gap-2 transition hover:text-slate-400" href="#">
+               <GiCheckMark />  Price List
               </a>
             </li>
 
             <li>
-              <a className="text-white transition hover:text-[#4B1A09]/75" href="#">
-               v Phone: 0822-5312-9334
+              <a className="text-white flex gap-2 transition hover:text-[#4B1A09]/75" href="#">
+               <GiCheckMark />  Phone: 0822-5312-9334
               </a>
             </li>
 
             <li>
-              <a className="text-white transition hover:text-[#4B1A09]/75" href="#">
-               v Privacy Policy
+              <a className="text-white flex gap-2 transition hover:text-[#4B1A09]/75" href="#">
+               <GiCheckMark />  Privacy Policy
               </a>
             </li>
 
             <li>
-              <a className="text-white transition hover:text-[#4B1A09]/75" href="#">
-                v Term & Condition
+              <a className="text-white flex gap-2 transition hover:text-[#4B1A09]/75" href="#">
+                <GiCheckMark />  Term & Condition
               </a>
             </li>
           </ul>
         </div>
-
-
 
       </div>
     </div>
