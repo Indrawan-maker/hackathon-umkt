@@ -25,7 +25,9 @@ export default function RootLayout({
       lang="id"
       className={cn("h-full", "antialiased", inter.className, "font-sans", geist.variable)}
     >
-      <body className="min-h-full flex flex-col scroll-smooth">{children}</body>
+      <body className="min-h-full flex flex-col scroll-smooth">
+        {children}
+      </body>
     </html>
   );
 }
