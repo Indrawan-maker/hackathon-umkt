@@ -1,0 +1,119 @@
+import Image from "next/image";
+import logo from '@/public/images/home-spa-logo.webp';
+import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
+
+export default function Footer () {
+    return (
+        <footer className="bg-[#4B1A09]">
+  <div className="mx-auto max-w-7xl px-4 pt-16 pb-6 sm:px-6 lg:px-8 lg:pt-24">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+      <div>
+        <div className="flex justify-center text-teal-600 sm:justify-start">
+            <Image src={logo} width={200} height={250} quality={70}  alt="spa logo" />
+        </div>
+
+        <p className="mt-6 max-w-md text-center leading-relaxed text-white sm:max-w-xs sm:text-left">
+           Satu-satunya home spa di Samarinda dengan ranjang pijat sungguhan. Nikmati pijat tubuh yang menenangkan, manicure dengan lebih dari 50 pilihan warna kuku, musik spa, dan aromaterapi langsung di rumah Anda. 
+        </p>
+
+        <ul className="mt-8 flex justify-center gap-6 sm:justify-start md:gap-8">
+          <li>
+            <a href="#" rel="noreferrer" target="_blank" className="text-white transition hover:text-slate-400">
+              <span className="sr-only">Facebook</span>
+              <div>
+                <span><FaFacebookSquare className="w-10 h-10"/></span>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" rel="noreferrer" target="_blank" className="text-white transition hover:text-slate-400">
+              <span className="sr-only">Instagram</span>
+              <div className="">
+                <span className=""><FaInstagram className="w-10 h-10"/></span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div className="grid grid-cols-1 sm:flex sm:gap-32 w-full">
+        <div className="text-center sm:text-left">
+          <p className="text-lg font-medium text-gray-200">Area Layanan</p>
+
+          <ul className="mt-8 space-y-4 text-sm">
+            <li>
+              <a className="text-white transition hover:text-slate-400" href="#">
+                v pijat panggilan Bandung
+              </a>
+            </li>
+
+            <li>
+              <a className="text-white transition hover:text-slate-400" href="#">
+                v Kota Samarinda
+              </a>
+            </li>
+
+            <li>
+              <a className="text-white transition hover:text-slate-400" href="#">
+                v Kabupaten Samarinda Seberang
+              </a>
+            </li>
+
+            <li> 
+              <a className="text-white transition hover:text-slate-400" href="#"> Careers </a>
+            </li>
+          </ul>
+        </div>
+
+        <div className="text-center sm:text-left ">
+          <p className="text-lg font-medium text-gray-200">Price List & Reservasi</p>
+          <ul className="mt-8 space-y-4 text-sm">
+            <li>
+              <a className="text-white transition hover:text-slate-400" href="#">
+               v Reservasi
+              </a>
+            </li>
+
+            <li>
+              <a className="text-white transition hover:text-slate-400" href="#">
+               v Price List
+              </a>
+            </li>
+
+            <li>
+              <a className="text-white transition hover:text-[#4B1A09]/75" href="#">
+               v Phone: 0822-5312-9334
+              </a>
+            </li>
+
+            <li>
+              <a className="text-white transition hover:text-[#4B1A09]/75" href="#">
+               v Privacy Policy
+              </a>
+            </li>
+
+            <li>
+              <a className="text-white transition hover:text-[#4B1A09]/75" href="#">
+                v Term & Condition
+              </a>
+            </li>
+          </ul>
+        </div>
+
+
+
+      </div>
+    </div>
+
+    <div className="mt-12 border-t border-gray-100 pt-6">
+      <div className="text-center sm:flex sm:justify-center sm:text-center">
+        <p className="mt-4 text-sm text-white sm:order-first sm:mt-0">
+          © 2026 Home Spa
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+    )
+}
