@@ -20,7 +20,7 @@ export default function Navbar() {
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 text-[#B7A997]">
                 <Link href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <Image src={logo} width={82} height={62} quality={70} alt="Home Spa Logo" />
-                    <span className="self-center text-xl text-heading font-semibold whitespace-nowrap">Home SPA</span>
+                    <span className="self-center hidden md:block text-xl text-heading font-semibold whitespace-nowrap">Home SPA</span>
                 </Link>
                 <div className="inline-flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <button type="button" className="bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none">Reservasi Sekarang!</button>

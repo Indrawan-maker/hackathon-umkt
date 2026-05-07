@@ -10,7 +10,7 @@ export default function Footer () {
   <div className="mx-auto max-w-7xl px-4 pt-16 pb-6 sm:px-6 lg:px-8 lg:pt-24">
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
       <div>
-        <div className="flex justify-center text-teal-600 sm:justify-start">
+        <div className="flex justify-center sm:justify-start">
             <Image src={logo} width={160} height={100} quality={70}  alt="spa logo" />
         </div>
 
@@ -49,13 +49,13 @@ export default function Footer () {
         </ul>
       </div>
 
-      <div className="grid grid-cols-1 sm:flex sm:gap-32 w-full">
+      <div className="grid grid-cols-1 md:flex md:gap-22 w-full mt-12 md:mt-0">
         <div className="text-center sm:text-left">
           <p className="text-xl font-medium text-gray-200">Area Layanan</p>
 
-          <ul className="mt-8 space-y-4 text-md">
+          <ul className="mt-8 space-y-4 text-md flex flex-col items-start ">
             <li>
-              <a className="text-white flex gap-2 transition hover:text-slate-400" href="#">
+              <a className="text-white flex gap-2 transition hover:text-slate-400 text-left" href="#">
                 <GiCheckMark /> pijat panggilan Bandung
               </a>
             </li>
@@ -75,7 +75,7 @@ export default function Footer () {
           </ul>
         </div>
 
-        <div className="text-center sm:text-left ">
+        <div className="text-center sm:text-left mt-22 md:mt-0">
           <p className="text-xl font-medium text-gray-200">Price List & Reservasi</p>
           <ul className="mt-8 space-y-4 text-md">
             <li>
@@ -91,19 +91,19 @@ export default function Footer () {
             </li>
 
             <li>
-              <a className="text-white flex gap-2 transition hover:text-[#4B1A09]/75" href="#">
+              <a className="text-white flex gap-2 transition hover:text-slate-400" href="#">
                <GiCheckMark />  Phone: 0822-5312-9334
               </a>
             </li>
 
             <li>
-              <a className="text-white flex gap-2 transition hover:text-[#4B1A09]/75" href="#">
+              <a className="text-white flex gap-2 transition hover:text-slate-400" href="#">
                <GiCheckMark />  Privacy Policy
               </a>
             </li>
 
             <li>
-              <a className="text-white flex gap-2 transition hover:text-[#4B1A09]/75" href="#">
+              <a className="text-white flex gap-2 transition hover:text-slate-400" href="#">
                 <GiCheckMark />  Term & Condition
               </a>
             </li>
