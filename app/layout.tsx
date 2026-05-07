@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter } from 'next/font/google'
+import { Inter, Geist } from 'next/font/google'
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -20,9 +23,9 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${inter.className} h-full antialiased`}
+      className={cn("h-full", "antialiased", inter.className, "font-sans", geist.variable)}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col scroll-smooth">{children}</body>
     </html>
   );
 }

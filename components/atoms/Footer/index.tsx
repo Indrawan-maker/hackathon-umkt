@@ -11,7 +11,7 @@ export default function Footer () {
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
       <div>
         <div className="flex justify-center text-teal-600 sm:justify-start">
-            <Image src={logo} width={200} height={250} quality={70}  alt="spa logo" />
+            <Image src={logo} width={160} height={100} quality={70}  alt="spa logo" />
         </div>
 
         <p className="mt-6 max-w-md text-center mx-auto sm:mx-0 leading-relaxed text-white sm:max-w-xs sm:text-left">

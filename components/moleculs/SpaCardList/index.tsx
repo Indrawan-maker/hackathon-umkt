@@ -4,7 +4,9 @@ import CardSpa from "@/components/atoms/CardSpa"
 export default function CardSpaList() {
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 mx-auto gap-x-4 gap-y-6">
+        <div 
+        id="spaServiceList"
+        className="grid grid-cols-1 md:grid-cols-3 mx-auto gap-x-4 gap-y-6 mt-12 mb-12">
               {
                   serviceSpaData.map((data) => (
                       <CardSpa
