@@ -19,10 +19,10 @@ export default function ServiceSelectorHeader() {
 
 
 
-    return (
+    return ( 
         <div className="flex justify-center items-center mt-32" translate="no">
             <section className="justify-center w-90 md:w-160" id="experience">
-                <h1 className="mb-4 text-gray-300 text-xl tracking-widest">Experience</h1>
+                <h1 className="mb-4 text-gray-300 text-xl tracking-widest">Rekomendasi AI</h1>
 
                 <section className="flex">
                     <div className="flex justify-around cursor-pointer mb-3 rounded-md h-8 items-center w-80" style={WorkWhenClick}
