@@ -1,23 +1,17 @@
-import { WorkStudies } from "./WorkStudies";
+import ServiceSelectorValue from "@/components/atoms/ServiceSelectorValue";
 import { useState } from 'react'
-
 
 export default function ServiceSelectorHeader() {
  const [isButtonClick, setIsButtonClick] = useState('work')
 
     const WorkWhenClick = {
-        backgroundColor: isButtonClick === 'work' ? 'white' : 'black',
-        color: isButtonClick === 'work' ? 'black' : 'white'
+        backgroundColor: isButtonClick === 'aiform' ? 'white' : 'black',
+        color: isButtonClick === 'aiform' ? 'black' : 'white'
     }
     const StudiesWhenClick = {
-        backgroundColor: isButtonClick === 'studies' ? 'white' : 'black',
-        color: isButtonClick === 'studies' ? 'black' : 'white'
+        backgroundColor: isButtonClick === 'manualform' ? 'white' : 'black',
+        color: isButtonClick === 'manualform' ? 'black' : 'white'
     }
-
-
-
-
-
 
     return ( 
         <div className="flex justify-center items-center mt-32" translate="no">
@@ -26,25 +20,24 @@ export default function ServiceSelectorHeader() {
 
                 <section className="flex">
                     <div className="flex justify-around cursor-pointer mb-3 rounded-md h-8 items-center w-80" style={WorkWhenClick}
-                    onClick={() => setIsButtonClick('work')}
+                    onClick={() => setIsButtonClick('aiform')}
                     >
                         <div className="cursor-pointer">
                             <button
-                                className="">Work</button>
-
+                                className="">Rekomendasi Ai</button>
                         </div>
                     </div>
                     <div className="flex justify-around cursor-pointer mb-3 rounded-md h-8 items-center w-80" style={StudiesWhenClick}
-                    onClick={() => setIsButtonClick('studies')}
+                    onClick={() => setIsButtonClick('manualform')}
                     >
                         <div className="">
                             <button
-                                className="">Studies</button>
+                                className="">Manual Form</button>
 
                         </div>
                     </div>
                 </section>
-                <WorkStudies setActiveTab={isButtonClick} />
+                <ServiceSelectorValue setActiveTab={isButtonClick} />
             </section>
         </div>
     )

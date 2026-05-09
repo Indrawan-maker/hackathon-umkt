@@ -1,7 +1,5 @@
-// import Icon1 from "./images/uinsi-icon.webp";
-import Icon1 from "./images/uinsi.jpg";
-import Icon2 from "./images/semar.png";
-import { Studies } from '@/components/atoms/Studies';
+import  ServiceSelectorAiForm  from '@/components/atoms/ServiceSelectorAiForm';
+import  ServiceSelectorBasicForm  from '@/components/atoms/ServiceSelectorBasicForm';
 
 export default function ServiceSelectorValue({ setActiveTab }: { setActiveTab: string }) {
     return (
@@ -10,11 +8,11 @@ export default function ServiceSelectorValue({ setActiveTab }: { setActiveTab: s
                 {
                     setActiveTab === 'work' ?
                         <>
-                            <Studies imageProps={Icon2} dateProps="2025 - now" titleProps="SEMAR" descProps="Working on freelance projects focusing on web development" />
+                            <ServiceSelectorAiForm />
                         </>
                         :
                         <>
-                            <Studies imageProps={Icon1} dateProps="August 2024 - August 2028" titleProps="UINSI" descProps="Undergraduate in Information System" />
+                            <ServiceSelectorBasicForm />
                         </>
                 }
             </div>
