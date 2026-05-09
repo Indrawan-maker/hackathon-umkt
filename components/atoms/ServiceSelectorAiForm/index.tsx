@@ -30,7 +30,7 @@ export default function ServiceSelectorAiForm() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>   
                 <div className="flex flex-col justify-start ml-auto items-start">
                     <label htmlFor="" className="text-xl font-medium">Pilih Area Tubuh <br /></label>
                     <p className="text-gray-400 text-sm">*anda dapat memilih lebih dari satu</p>
