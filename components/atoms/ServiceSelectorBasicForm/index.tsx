@@ -15,7 +15,7 @@ import { useRef, useState } from "react"
 
 export default function ServiceSelectorBasicForm() {
     const [gender, setGender] = useState<string[]>([]);
-    const [date, setDate] = useState<Date>();
+    const [date, setDate] = useState<Date | undefined>();
     const [time, setTime] = useState("");
     const timeRef = useRef<HTMLInputElement>(null)
 
@@ -63,7 +63,6 @@ const openTimePicker = () => {
                         <label htmlFor="" className="mb-2 text-xl">Gender <span className="text-red-600">*</span></label>
                         <p className="text-sm text-gray-500 mb-1">Jika lebih dari 1 orang dan berbeda gender seperti pasangan suami istri, harap dicentang keduanya</p>
                         <label
-                            id="pria"
                             className={
                                 `flex justify-start items-center gap-6 w-full border-2 rounded-md h-12 py-2 px-8 mb-4 cursor-pointer
                         ${gender.includes("pria") ? 'border-4 border-[#8B6B52] text-[#9D8B7F]' : ''
@@ -77,12 +76,11 @@ const openTimePicker = () => {
                                 onCheckedChange={() => handleCheckboxGender("pria")}
                                 className="data-[state=checked]:bg-[#8B6B52] data-[state=checked]:border-[#C9A882] w-5 h-5"
                             />
-                            <label htmlFor="pria"
+                            <span
                                 className="text-xl"
-                            >Pria</label>
+                            >Pria</span>
                         </label>
                         <label
-                            id="pria"
                             className={
                                 `flex justify-start items-center gap-6 w-full border-2 rounded-md h-12 py-2 px-8 cursor-pointer
                         ${gender.includes("wanita") ? 'border-4 border-[#8B6B52] text-[#9D8B7F]' : ''
@@ -96,9 +94,9 @@ const openTimePicker = () => {
                                 onCheckedChange={() => handleCheckboxGender("wanita")}
                                 className="data-[state=checked]:bg-[#8B6B52] data-[state=checked]:border-[#C9A882] w-5 h-5"
                             />
-                            <label htmlFor="wanita"
+                            <span
                                 className="text-xl"
-                            >Wanita</label>
+                            >Wanita</span>
                         </label>
                     </div>
                     <div className="md:flex w-full mt-4 md:mt-8">
@@ -115,7 +113,7 @@ const openTimePicker = () => {
                             {/* date expectected start */}
                             {/* tanggal */}
                             <div className="flex flex-col gap-2">
-                                <label>Tanggal Treatment</label>
+                                <label htmlFor="date">Tanggal Treatment</label>
 
                                 <Popover>
                                     <PopoverTrigger asChild>
@@ -123,12 +121,13 @@ const openTimePicker = () => {
                                             variant="outline"
                                             className="justify-start text-left font-normal"
                                         >
-                                            {date ? 'sementara gini ntar ganti format tanggal kapan hari lah' : "Pilih tanggal"}
+                                            {date ? date.toDateString()  : "Pilih tanggal"}
                                         </Button>
                                     </PopoverTrigger>
 
                                     <PopoverContent className="w-auto p-0">
                                         <Calendar
+                                        id="date"
                                             mode="single"
                                             selected={date}
                                             onSelect={setDate}
