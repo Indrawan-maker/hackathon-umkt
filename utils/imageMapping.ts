@@ -7,39 +7,43 @@ import kaki from '@/public/images/anatomy/kaki.webp'
 import kepalaDanPunggung from '@/public/images/anatomy/kepaladanpunggung.webp'
 import kepalaDanLengan from '@/public/images/anatomy/kepaladanlengan.webp'
 import kepalaDanKaki from '@/public/images/anatomy/kepaladankaki.webp'
+import lenganDanKaki from '@/public/images/anatomy/lengandankaki.webp'
 import kepalaDanPunggungDanLengan from '@/public/images/anatomy/kepaladanpunggungdanlengan.webp'
 import kepalaDanPunggungDanKaki from '@/public/images/anatomy/kepaladanpunggungdankaki.webp'
 import kepalaDanLenganDanKaki from '@/public/images/anatomy/kepaladanlengandankaki.webp'
 import punggungDanLengan from '@/public/images/anatomy/punggungdanlengan.webp'
 import punggungDanKaki from '@/public/images/anatomy/punggungdankaki.webp'
+import lenganDanPunggungDanKaki from '@/public/images/anatomy/punggungdanlengandankaki.webp'
 import kepalaDanPunggungDanLenganDanKaki from '@/public/images/anatomy/full-badan.webp'
 
 export const imageMapping = {
-    'kepala': kepala,
-    'kepala-lengan': kepalaDanLengan,
-    'kepala-punggung': kepalaDanPunggung,
-    //   tidak terpakai karena mengurutakn dari alphabet start
-    'kepala-kaki': kepalaDanKaki,
-    //   tidak terpakai karena mengurutakn dari alphabet end
-    'kepala-punggung-lengan': kepalaDanPunggungDanLengan,
-    'kepala-punggung-kaki': kepalaDanPunggungDanKaki,
-    'kepala-lengan-punggung': kepalaDanPunggungDanLengan,
-    'kepala-lengan-kaki': kepalaDanLenganDanKaki,
-        //   tidak terpakai karena mengurutakn dari alphabet start
-        'kepala-lengan-punggung-kaki': kepalaDanPunggungDanLenganDanKaki,
-        //   tidak terpakai karena mengurutakn dari alphabet end
+  // Single
+  'kepala': kepala,
+  'lengan': lengan,
+  'punggung': punggung,
+  'kaki': kaki,
 
-    'kaki': kaki,
-    'punggung': punggung,
-    'lengan': lengan,
-    'punggung-lengan': punggungDanLengan,
-    'kaki-kepala-punggung': kepalaDanPunggungDanKaki,
-    'kaki-kepala-lengan': kepalaDanLenganDanKaki,
-    'kaki-punggung-lengan': punggungDanKaki,
-    'kaki-punggung': punggungDanKaki,
-    'kaki-lengan': kepalaDanLengan,
-    'kaki-kepala-punggung-lengan': kepalaDanPunggungDanLenganDanKaki,
+  // Double
+  'kepala-lengan': kepalaDanLengan,
+  'kepala-punggung': kepalaDanPunggung,
+  'kepala-kaki': kepalaDanKaki,
 
-    'kaki-kepala': kepalaDanKaki,
+  'lengan-punggung': punggungDanLengan,
+
+  'punggung-kaki': punggungDanKaki,
+
+
+  'lengan-kaki': lenganDanKaki,
+
+  // Triple
+  'kepala-lengan-punggung': kepalaDanPunggungDanLengan,
+
+  'kepala-lengan-kaki': kepalaDanLenganDanKaki,
+  'kepala-punggung-kaki': kepalaDanPunggungDanKaki,
+  'lengan-punggung-kaki': lenganDanPunggungDanKaki,
+
+  // Full
+  'kepala-lengan-punggung-kaki':
+    kepalaDanPunggungDanLenganDanKaki,
 
 }
