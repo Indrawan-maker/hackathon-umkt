@@ -14,6 +14,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from 'react';
 import { CiMenuBurger } from 'react-icons/ci';
+import { FaInstagram } from 'react-icons/fa';
+import { AiFillTikTok } from 'react-icons/ai';
 
 const SHEET_SIDES = ["top", "right", "bottom", "left"] as const
 
@@ -43,6 +45,9 @@ export default function Navbar() {
                     <Image src={logo} width={82} height={62} quality={70} alt="Home Spa Logo" />
                     <span className="self-center hidden md:block text-xl text-heading font-semibold whitespace-nowrap">Home SPA</span>
                 </Link>
+
+                {/* hamburger area start */}
+
                 <div className="inline-flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <button type="button" className="hover:bg-brand-strong box-border border border-transparent cursor-pointer font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none">Reservasi Sekarang!</button>
                     <Sheet>
@@ -55,24 +60,64 @@ export default function Navbar() {
                         <SheetContent side='left' className='bg-[#F5E6C8]'>
                             <SheetHeader>
                                 <SheetTitle>
-                                    <Image src={logo} width={80} height={60} alt='logo spa' />
+                                    <div className='flex justify-start items-center mr-4'>
+                                    <Image src={logo} width={100} height={80} alt='logo spa' />
+                                    </div>
                                 </SheetTitle>
                             </SheetHeader>
-                            <div>
-                                isi
-                            </div>
-                            <SheetFooter>
-                                <button>@Home Spa</button>
+                            <section className='flex flex-col'>
+                                <div className='flex flex-col gap-4 ml-4'>
+                                    <Link href='/'>
+                                    Home
+                                    </Link>
+                                    <Link href='/'>
+                                    Service
+                                    </Link>
+                                    <Link href='/'>
+                                    Testimoni
+                                    </Link>
+                                    <Link href='/'>
+                                    Pricing
+                                    </Link>
+                                    <Link href='/'>
+                                    Contact
+                                    </Link>
+                                </div>
+                            </section>
+                            <SheetFooter className='mb-2'>
+                                <section className='flex flex-col'>
+                                <div className='mb-4'>
+                                    <div className="mb-2">
+                                        <span className="flex flex-col justify-start items-center gap-2 mb-8 wrap-break-word">
+                                            <p>Temukan juga Home Spa</p>
+                                            <p> Samarinda di : </p>
+                                            </span>
+                                    </div>
+                                    <div className="mb-2">
+                                        <span className="flex justify-center items-center gap-2">
+                                            <FaInstagram className="w-6 h-6" />
+                                            <p>@home-spa-samarinda</p>
+                                            </span>
+                                    </div>
+                                    <div className="">
+                                        <span className="flex justify-center items-center gap-2">
+                                            <AiFillTikTok className="w-6 h-6" />
+                                            <p>@home-spa-samarinda</p>
+                                            </span>
+                                    </div>
+                                </div>
+                                <div>
 
-                                <SheetClose asChild>
-                                    <button>
-                                        Cancel
-                                    </button>
-                                </SheetClose>
+                                </div>
+                                <button>© Home Spa - 2026</button>
+                                </section>
                             </SheetFooter>
                         </SheetContent>
                     </Sheet>
                 </div>
+
+                {/* hamburger area end */}
+
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
                         <li>
