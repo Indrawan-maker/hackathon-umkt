@@ -1,17 +1,95 @@
+import { FormEvent, useState } from "react"
+import abu from '@/public/images/anatomy/default.webp';
+import { imageMapping } from "@/utils/imageMapping";
+import Image from "next/image";
+
+
 export default function ServiceSelectorAiForm() {
 
+    const [selected, setSelected] = useState<string[]>([])
+
+    const areas = [
+        { id: "kepala", label: "Kepala", desc: "Kepala & Leher" },
+        { id: "punggung", label: "Punggung", desc: "Punggung & Bahu" },
+        { id: "tangan", label: "Tangan", desc: "Tangan & Lengan" },
+        { id: "kaki", label: "Kaki", desc: "Kaki & Betis" },
+    ]
+
+    const handleSelectedBtn = (id: string) => {
+        setSelected(selected.includes(id)
+            ? selected.filter(x => x !== id)
+            : [...selected, id]
+        )
+    }
+
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault()
+        console.log(selected)
+    }
+
+    const getSelectedImage = () => {
+  if (selected.length === 0) return abu
+  
+  const key = selected
+    .sort()
+    .map((area, index) => index === 0 ? area : area.charAt(0).toUpperCase() + area.slice(1))
+    .join('Dan')
+  return imageMapping[key as keyof typeof imageMapping] || abu
+}
     return (
         <>
-        <form action="">
-            <div>
-            <label htmlFor="">namakkkk</label>
-            <input type="text" placeholder="isikan nama"/>
-            </div>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus, repellat, rem eligendi repudiandae ab dicta deleniti error accusamus repellendus voluptatum, quos officia laborum perspiciatis nisi aliquid atque! Qui, sed. Totam corporis, recusandae sapiente quasi ipsum corrupti beatae. Ratione necessitatibus magni amet ut? Illum a est quaerat deleniti, tenetur dignissimos laboriosam nulla modi eum mollitia magnam nemo, nam sit adipisci saepe officiis nisi molestias placeat facere! Facilis repellendus numquam exercitationem amet omnis ipsa quas in ad, ratione modi molestias dolore commodi rem cum quam ex soluta odit ab rerum temporibus natus, neque sint quisquam? Sint neque repellendus libero aspernatur ducimus autem praesentium, culpa obcaecati quas suscipit quod officia, placeat cumque ut, distinctio dolor necessitatibus alias? Similique ullam officiis reprehenderit voluptates voluptate aperiam inventore, laudantium officia, rem facere quos possimus est labore dicta accusamus? At reiciendis accusamus, iure saepe beatae, porro et placeat vero maxime ab repudiandae veritatis! Porro veniam laboriosam nisi illo veritatis? Nulla fugit alias, tempore incidunt dolore provident aspernatur error ut a iste tenetur quaerat harum, sunt repellat quae consequuntur deleniti hic in voluptatum dignissimos maiores. Distinctio repellat quas odio consectetur autem itaque ex quisquam. Commodi voluptate voluptatibus laborum, nobis aliquam voluptas cupiditate optio ipsam aliquid cumque eligendi facere sed, distinctio accusamus quidem temporibus eum. Tempora, corporis voluptatum. Quidem est pariatur, perferendis sed officia numquam? Quod ea enim minus? Lorem ipsum dolor sit amet consectetur, adipisicing elit. In aliquid eos dolore quidem voluptates quo repudiandae temporibus nam! Iusto recusandae veritatis consequuntur neque laudantium enim, quaerat voluptatum eligendi modi quae ex ullam dolor non rerum atque in voluptatem accusamus optio laboriosam est. Minima natus eum necessitatibus. Corrupti repudiandae neque quasi, impedit quaerat incidunt tempore. Eaque repudiandae, iusto inventore saepe sint doloremque officia corporis repellat quibusdam eveniet porro blanditiis, omnis exercitationem? Hic odit labore corporis magnam quisquam, animi alias nemo laudantium ullam numquam quas aut adipisci minus nesciunt expedita repellat iure optio, iste error impedit ea unde. Nesciunt, aut? Vitae eum distinctio consequuntur ipsa. Molestiae voluptate delectus consequuntur obcaecati harum? Aliquid repellendus animi quis? Esse voluptates sapiente doloribus deleniti totam dolores tempora praesentium reiciendis dolorem accusantium nobis, velit nihil non cum perferendis aliquam atque harum temporibus quas. Iste, tempore ad quas explicabo voluptatibus illum molestiae consequatur dolorem perspiciatis quod odio ab rem exercitationem! Amet tenetur eligendi magni eaque rem placeat, ipsam itaque aliquid architecto natus maiores vitae omnis. Ipsam, et sed ipsa quidem aliquid culpa! Qui consectetur rem itaque minus ipsa quis unde tenetur reiciendis voluptas, magni nam, veniam laudantium nemo dolores ea soluta, voluptates ipsum ut pariatur dolore iusto! Atque repellat cum vitae corrupti placeat ipsam quod quibusdam nihil consequatur non tempora doloremque, aliquid rerum, fuga saepe nam odit molestiae ducimus facere reiciendis consequuntur architecto voluptatibus? Vero illum reprehenderit id illo non unde beatae itaque officiis ut quidem nisi impedit consequuntur odio voluptatum corporis cum, deleniti deserunt perspiciatis velit natus quas? Perferendis cum libero dolor vero, repellat dolores voluptatum quas ex culpa rerum nesciunt sapiente, nulla veritatis debitis! Temporibus dolor possimus aliquid asperiores tempora consectetur facere, vitae nostrum inventore voluptate aspernatur vel iste nulla vero, repellendus et sapiente id saepe dolores quas voluptatum sed neque. Ducimus, incidunt! Amet consequatur perferendis exercitationem voluptas esse nobis est accusamus fugit. Quidem provident labore dicta qui inventore dolores velit dolor ut accusamus impedit blanditiis harum in exercitationem dolorem minus nam doloremque dolorum dignissimos, beatae eveniet error ducimus soluta? Mollitia, illum omnis. Fugiat exercitationem voluptas, dicta, necessitatibus quasi, incidunt modi nihil accusantium pariatur porro obcaecati nam. Consectetur provident facilis velit quo deleniti nam exercitationem ratione eum dolor maxime ullam ut, eligendi magni fugit dolorum neque in delectus ex aperiam similique. Maiores at ex veniam ipsum dolor. Odio, exercitationem quis excepturi iste eos porro saepe assumenda eum eius maiores cupiditate molestias nemo, doloribus omnis, deleniti quas?
-            <div>
-                <button type="submit">Kirim</button>
-            </div>
-        </form>
+            <form onSubmit={handleSubmit}>
+                <div className="flex flex-col justify-start ml-auto items-start">
+                    <label htmlFor="" className="text-xl font-medium">Pilih Area Tubuh <br /></label>
+                    <p className="text-gray-400">*anda dapat memilih lebih dari satu</p>
+                </div>
+                <section>
+                </section>
+                <section className="grid grid-cols-2 md:grid-cols-3 mt-4 gap-x-4 gap-y-2">
+                    {/* kepala */}
+                    {areas.map(area => (
+                        <div
+                            className="w-62 h-28"
+                            key={area.id}>
+                            <button
+                                value='kepala'
+                                onClick={() => handleSelectedBtn(area.id)}
+                                className={
+                                    `border rounded-xl cursor-pointer w-full h-full p-4 transition duration-300 ${selected.includes(area.id) ? 'border-4 border-[#8B6B52]' : ''}`
+                                }
+                                type="button"
+
+                            >
+                                <h2 className="text-left mb-2">{area.label}</h2>
+                                <p className="text-left text-gray-400">{area.desc}</p>
+                            </button>
+                        </div>
+                    ))}
+                </section>
+                {/* area gambar tubuh start*/}
+                <section>
+                    <div>
+                        <Image
+                            src={getSelectedImage()}
+                            alt='test'
+                            loading="lazy"
+                        />
+                    </div>
+                </section>
+                {/* area gambar tubuh end*/}
+
+
+                <div className="mt-12 flex justify-end">
+                    <button
+                        type="submit"
+                        disabled={selected.length === 0}
+                        className={`w-full h-12 rounded-md
+                        ${selected.length === 0 ?
+                                'bg-[#E8DDD3] text-[#9D8B7F] cursor-no-drop' : 'bg-[#C9A882] text-white'
+                            }`}
+                    >Kirim</button>
+                </div>
+            </form>
         </>
     )
 }

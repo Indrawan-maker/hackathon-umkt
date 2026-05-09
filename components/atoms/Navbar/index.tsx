@@ -2,9 +2,7 @@
 import logo from '@/public/images/home-spa-logo.webp';
 import {
     Sheet,
-    SheetClose,
     SheetContent,
-    SheetDescription,
     SheetFooter,
     SheetHeader,
     SheetTitle,
@@ -13,11 +11,9 @@ import {
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from 'react';
-import { CiMenuBurger } from 'react-icons/ci';
 import { FaInstagram } from 'react-icons/fa';
 import { AiFillTikTok } from 'react-icons/ai';
-
-const SHEET_SIDES = ["top", "right", "bottom", "left"] as const
+import { IoMenu } from 'react-icons/io5';
 
 
 
@@ -53,7 +49,7 @@ export default function Navbar() {
                     <Sheet>
                         <SheetTrigger>
                             <button className='inline-flex items-center p-2 w-11 h-11 justify-center text-sm text-body rounded-base md:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary'>
-                                <CiMenuBurger className='w-full h-full' />
+                                <IoMenu className='w-full h-full' />
                             </button>
                         </SheetTrigger>
 
