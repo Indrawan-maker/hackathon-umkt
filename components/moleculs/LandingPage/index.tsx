@@ -11,7 +11,7 @@ export default function LandingPage() {
     <>
     <Navbar />
     <Hero />
-    {/* <ServiceSelector /> */}
+    <ServiceSelector />
     <CardSpaList />
     <Footer />
     </>
