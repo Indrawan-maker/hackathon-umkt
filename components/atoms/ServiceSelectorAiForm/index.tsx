@@ -6,21 +6,22 @@ import { getSelectedImage } from "@/utils/getSelectedImage";
 
 export default function ServiceSelectorAiForm() {
 
-    const [selected, setSelected] = useState<string[]>([])
+    const [selected, setSelected] = useState<number[]>([])
 
     const areas = [
-        { id: "kepala", label: "Kepala", desc: "Kepala & Leher" },
-        { id: "punggung", label: "Punggung", desc: "Punggung & Bahu" },
-        { id: "tangan", label: "Tangan", desc: "Tangan & Lengan" },
-        { id: "kaki", label: "Kaki", desc: "Kaki & Betis" },
+        { id: 1, name: "kepala", label: "Kepala", desc: "Kepala & Leher" },
+        { id: 2, name: "lengan", label: "Tangan", desc: "Tangan & Lengan" },
+        { id: 3, name: "punggung", label: "Punggung", desc: "Punggung & Bahu" },
+        { id: 4, name: "kaki",label: "Kaki", desc: "Kaki & Betis" },
     ]
 
-    const handleSelectedBtn = (id: string) => {
+    const handleSelectedBtn = (id: number) => {
         setSelected(selected.includes(id)
             ? selected.filter(x => x !== id)
             : [...selected, id]
         )
     }
+    console.log(selected)
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()

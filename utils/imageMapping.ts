@@ -15,22 +15,31 @@ import punggungDanKaki from '@/public/images/anatomy/punggungdankaki.webp'
 import kepalaDanPunggungDanLenganDanKaki from '@/public/images/anatomy/full-badan.webp'
 
 export const imageMapping = {
-  'kepala': kepala,
-  'kaki': kaki,
-  'punggung': punggung,
-  'tangan': lengan,
-  // Combo 2 area
-  'kaki-punggung': punggungDanKaki,
-  'kaki-tangan': kepalaDanLengan,
-  'kepala-kaki': kepalaDanKaki,
-  'kepala-punggung': kepalaDanPunggung,
-  'kepala-tangan': kepalaDanLengan,
-  'punggung-tangan': punggungDanLengan,
-  // Combo 3 area
-  'kaki-kepala-punggung': kepalaDanPunggungDanKaki,
-  'kaki-kepala-tangan': kepalaDanLenganDanKaki,
-  'kaki-punggung-tangan': punggungDanKaki,  // Reuse punggungDanKaki
-  'kepala-punggung-tangan': kepalaDanPunggungDanLengan,
-  // Combo 4 area
-  'kaki-kepala-punggung-tangan': kepalaDanPunggungDanLenganDanKaki,
+    'kepala': kepala,
+    'kepala-lengan': kepalaDanLengan,
+    'kepala-punggung': kepalaDanPunggung,
+    //   tidak terpakai karena mengurutakn dari alphabet start
+    'kepala-kaki': kepalaDanKaki,
+    //   tidak terpakai karena mengurutakn dari alphabet end
+    'kepala-punggung-lengan': kepalaDanPunggungDanLengan,
+    'kepala-punggung-kaki': kepalaDanPunggungDanKaki,
+    'kepala-lengan-punggung': kepalaDanPunggungDanLengan,
+    'kepala-lengan-kaki': kepalaDanLenganDanKaki,
+        //   tidak terpakai karena mengurutakn dari alphabet start
+        'kepala-lengan-punggung-kaki': kepalaDanPunggungDanLenganDanKaki,
+        //   tidak terpakai karena mengurutakn dari alphabet end
+
+    'kaki': kaki,
+    'punggung': punggung,
+    'lengan': lengan,
+    'punggung-lengan': punggungDanLengan,
+    'kaki-kepala-punggung': kepalaDanPunggungDanKaki,
+    'kaki-kepala-lengan': kepalaDanLenganDanKaki,
+    'kaki-punggung-lengan': punggungDanKaki,
+    'kaki-punggung': punggungDanKaki,
+    'kaki-lengan': kepalaDanLengan,
+    'kaki-kepala-punggung-lengan': kepalaDanPunggungDanLenganDanKaki,
+
+    'kaki-kepala': kepalaDanKaki,
+
 }
