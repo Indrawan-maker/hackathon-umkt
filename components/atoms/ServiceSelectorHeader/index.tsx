@@ -3,7 +3,7 @@ import ServiceSelectorValue from "@/components/atoms/ServiceSelectorValue";
 import { useState } from 'react'
 
 export default function ServiceSelectorHeader() {
- const [isButtonClick, setIsButtonClick] = useState('work')
+ const [isButtonClick, setIsButtonClick] = useState('aiform')
 
     const WorkWhenClick = {
         backgroundColor: isButtonClick === 'aiform' ? '#C9A882' : 'white',
