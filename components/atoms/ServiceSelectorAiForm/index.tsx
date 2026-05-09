@@ -1,7 +1,7 @@
 import { FormEvent, useState } from "react"
 import abu from '@/public/images/anatomy/default.webp';
-import { imageMapping } from "@/utils/imageMapping";
 import Image from "next/image";
+import { getSelectedImage } from "@/utils/getSelectedImage";
 
 
 export default function ServiceSelectorAiForm() {
@@ -27,15 +27,6 @@ export default function ServiceSelectorAiForm() {
         console.log(selected)
     }
 
-    const getSelectedImage = () => {
-  if (selected.length === 0) return abu
-  
-  const key = selected
-    .sort()
-    .map((area, index) => index === 0 ? area : area.charAt(0).toUpperCase() + area.slice(1))
-    .join('Dan')
-  return imageMapping[key as keyof typeof imageMapping] || abu
-}
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -67,12 +58,13 @@ export default function ServiceSelectorAiForm() {
                     ))}
                 </section>
                 {/* area gambar tubuh start*/}
-                <section>
-                    <div>
+                <section className="mt-6 flex justify-center items-center">
+                    <div className="w-42 h-120">
                         <Image
-                            src={getSelectedImage()}
+                            src={getSelectedImage(selected, abu)}
                             alt='test'
                             loading="lazy"
+                            className="w-full h-full"
                         />
                     </div>
                 </section>

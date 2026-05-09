@@ -12,21 +12,25 @@ import kepalaDanPunggungDanKaki from '@/public/images/anatomy/kepaladanpunggungd
 import kepalaDanLenganDanKaki from '@/public/images/anatomy/kepaladanlengandankaki.webp'
 import punggungDanLengan from '@/public/images/anatomy/punggungdanlengan.webp'
 import punggungDanKaki from '@/public/images/anatomy/punggungdankaki.webp'
-import lenganDanKaki from '@/public/images/anatomy/lengandankaki.webp'
 import kepalaDanPunggungDanLenganDanKaki from '@/public/images/anatomy/full-badan.webp'
+
 export const imageMapping = {
-  kepala,
-  punggung,
-  lengan,
-  kaki,
-  kepalaDanPunggung,
-  kepalaDanLengan,
-  kepalaDanKaki,
-  punggungDanLengan,
-  punggungDanKaki,
-  lenganDanKaki,
-  kepalaDanPunggungDanLengan,
-  kepalaDanPunggungDanKaki,
-  kepalaDanLenganDanKaki,
-  kepalaDanPunggungDanLenganDanKaki,
+  'kepala': kepala,
+  'kaki': kaki,
+  'punggung': punggung,
+  'tangan': lengan,
+  // Combo 2 area
+  'kaki-punggung': punggungDanKaki,
+  'kaki-tangan': kepalaDanLengan,
+  'kepala-kaki': kepalaDanKaki,
+  'kepala-punggung': kepalaDanPunggung,
+  'kepala-tangan': kepalaDanLengan,
+  'punggung-tangan': punggungDanLengan,
+  // Combo 3 area
+  'kaki-kepala-punggung': kepalaDanPunggungDanKaki,
+  'kaki-kepala-tangan': kepalaDanLenganDanKaki,
+  'kaki-punggung-tangan': punggungDanKaki,  // Reuse punggungDanKaki
+  'kepala-punggung-tangan': kepalaDanPunggungDanLengan,
+  // Combo 4 area
+  'kaki-kepala-punggung-tangan': kepalaDanPunggungDanLenganDanKaki,
 }
