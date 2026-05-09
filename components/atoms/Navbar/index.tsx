@@ -67,20 +67,17 @@ export default function Navbar() {
                             </SheetHeader>
                             <section className='flex flex-col'>
                                 <div className='flex flex-col gap-4 ml-4'>
-                                    <Link href='/'>
-                                    Home
+                                    <Link href='#beranda'>
+                                    Beranda
                                     </Link>
-                                    <Link href='/'>
-                                    Service
+                                    <Link href='#tentang'>
+                                    Tentang Kami
                                     </Link>
-                                    <Link href='/'>
-                                    Testimoni
+                                    <Link href='#layanan'>
+                                    Layanan
                                     </Link>
-                                    <Link href='/'>
-                                    Pricing
-                                    </Link>
-                                    <Link href='/'>
-                                    Contact
+                                    <Link href='#kontak'>
+                                    Kontak
                                     </Link>
                                 </div>
                             </section>
@@ -121,16 +118,16 @@ export default function Navbar() {
                 <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
                     <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
                         <li>
-                            <a href="#" className="block py-2 px-3 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0" aria-current="page">Home</a>
+                            <Link href="#beranda" className="block py-2 px-3 bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0" aria-current="page">Beranda</Link>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">About</a>
+                            <Link href="#tentang" className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Tentang</Link>
                         </li>
                         <li>
-                            <a href="#spaServiceList" className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Services</a>
+                            <Link href="#layanan" className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Layanan</Link>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Contact</a>
+                            <Link href="#kontak" className="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Kontak</Link>
                         </li>
                     </ul>
                 </div>

@@ -6,7 +6,8 @@ import { motion } from 'framer-motion';
 export default function Hero() {
     return (
         <>
-            <main className="w-full min-h-screen relative">
+            <main id="beranda"
+            className="w-full min-h-screen relative">
                 <Image className="absolute inset-0 w-full h-full object-cover"
                     src={hero}
                     priority

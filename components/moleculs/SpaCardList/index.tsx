@@ -8,7 +8,7 @@ export default function CardSpaList() {
     return (
         <section
             className="mx-auto mt-12 mb-12"
-            id="spaServiceList"
+            id="layanan"
         >
             <div
             >

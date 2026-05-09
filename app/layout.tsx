@@ -23,9 +23,9 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={cn("h-full", "antialiased", inter.className, "font-sans", geist.variable)}
+      className={cn("h-full", "antialiased", inter.className, "font-sans", geist.variable, "scroll-smooth")}
     >
-      <body className="min-h-full flex flex-col scroll-smooth">
+      <body className="min-h-full flex flex-col">
         {children}
       </body>
     </html>

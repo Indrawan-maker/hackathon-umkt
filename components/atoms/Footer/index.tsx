@@ -6,7 +6,8 @@ import { GiCheckMark } from "react-icons/gi";
 
 export default function Footer () {
     return (
-        <footer className="bg-[#4B1A09]">
+        <footer id="kontak"
+        className="bg-[#4B1A09]">
   <div className="mx-auto max-w-7xl px-4 pt-16 pb-6 sm:px-6 lg:px-8 lg:pt-24">
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
       <div>

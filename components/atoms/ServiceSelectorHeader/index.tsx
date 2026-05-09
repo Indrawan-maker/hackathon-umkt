@@ -17,7 +17,7 @@ export default function ServiceSelectorHeader() {
     return (
         <div className="flex justify-center items-center mt-32" translate="no">
             <section className="w-90 md:w-280" id="experience">
-                <div className="flex justify-center mt-6 mb-12 ml-4 md:ml-0">
+                <div className="flex justify-center mt-6 mb-8 ml-4 md:ml-0">
                     <h1 className="mb-4 flex text-black font-extrabold text-3xl tracking-wide">Rekomendasi Reservasi</h1>
                 </div>
                 <div className="mx-auto w-84 md:w-164 h-12 mb-12">
