@@ -1,3 +1,4 @@
+"use client"
 import ServiceSelectorValue from "@/components/atoms/ServiceSelectorValue";
 import { useState } from 'react'
 
@@ -5,38 +6,40 @@ export default function ServiceSelectorHeader() {
  const [isButtonClick, setIsButtonClick] = useState('work')
 
     const WorkWhenClick = {
-        backgroundColor: isButtonClick === 'aiform' ? 'white' : 'black',
-        color: isButtonClick === 'aiform' ? 'black' : 'white'
+        backgroundColor: isButtonClick === 'aiform' ? '#C9A882' : 'white',
+        color: isButtonClick === 'aiform' ? 'white' : '#8B6B52'
     }
     const StudiesWhenClick = {
-        backgroundColor: isButtonClick === 'manualform' ? 'white' : 'black',
-        color: isButtonClick === 'manualform' ? 'black' : 'white'
+        backgroundColor: isButtonClick === 'manualform' ? '#C9A882' : 'white',
+        color: isButtonClick === 'manualform' ? 'white' : '#8B6B52'
     }
 
     return ( 
         <div className="flex justify-center items-center mt-32" translate="no">
-            <section className="justify-center w-90 md:w-160" id="experience">
-                <h1 className="mb-4 text-gray-300 text-xl tracking-widest">Rekomendasi AI</h1>
-
-                <section className="flex">
-                    <div className="flex justify-around cursor-pointer mb-3 rounded-md h-8 items-center w-80" style={WorkWhenClick}
+            <section className="w-90 md:w-280" id="experience">
+                <div className="flex justify-center mt-6 mb-12">
+                <h1 className="mb-4 flex text-black font-extrabold text-3xl tracking-wide">Rekomendasi Reservasi</h1>
+                </div>
+                <div className="mx-auto w-164 h-12 mb-12">
+                <section className="flex justify-center items-center border-2 border-[#8B6B52] rounded-md w-full h-full">
+                    <div className="flex justify-around cursor-pointer rounded-md h-8 items-center w-80" style={WorkWhenClick}
                     onClick={() => setIsButtonClick('aiform')}
                     >
                         <div className="cursor-pointer">
                             <button
-                                className="">Rekomendasi Ai</button>
+                                className="cursor-pointer">Rekomendasi Ai</button>
                         </div>
                     </div>
-                    <div className="flex justify-around cursor-pointer mb-3 rounded-md h-8 items-center w-80" style={StudiesWhenClick}
+                    <div className="flex justify-around cursor-pointer rounded-md h-8 items-center w-80" style={StudiesWhenClick}
                     onClick={() => setIsButtonClick('manualform')}
                     >
-                        <div className="">
+                        <div className="cursor-pointer">
                             <button
-                                className="">Manual Form</button>
-
+                                className="cursor-pointer">Manual Form</button>
                         </div>
                     </div>
                 </section>
+                    </div>
                 <ServiceSelectorValue setActiveTab={isButtonClick} />
             </section>
         </div>

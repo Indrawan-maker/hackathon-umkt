@@ -4,9 +4,9 @@ import  ServiceSelectorBasicForm  from '@/components/atoms/ServiceSelectorBasicF
 export default function ServiceSelectorValue({ setActiveTab }: { setActiveTab: string }) {
     return (
  <div>
-            <div className="flex md:grid md:w-full md:h-auto border-2 rounded-xl border-white">
+            <div className="flex md:grid md:w-full md:h-auto border-2 rounded-xl border-[#8B6B52]">
                 {
-                    setActiveTab === 'work' ?
+                    setActiveTab === 'aiform' ?
                         <>
                             <ServiceSelectorAiForm />
                         </>
