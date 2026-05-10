@@ -98,7 +98,7 @@ Terima kasih.
                 </section>
                 <section className="mt-8">
                     {/* dialog  start */}
-                    <div className="gap-4 grid grid-cols-2 md:grid-cols-3">
+                    <div className="gap-4 grid grid-cols-1 md:grid-cols-3">
                         {TREATMENTS.map((item) => (
                             <Dialog key={item.kode}>
                                 <DialogTrigger asChild>
@@ -121,7 +121,7 @@ Terima kasih.
                                     />
                                 </DialogTrigger>
 
-                                <DialogContent  className="max-w-2xl min-h-75 rounded-2xl">
+                                <DialogContent  className="w-md md:max-w-2xl min-h-75 rounded-2xl">
                                     <DialogHeader>
                                         <DialogTitle>{item.nama}</DialogTitle>
                                     </DialogHeader>
