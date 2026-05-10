@@ -1,16 +1,163 @@
+"use client"
+
+import { Calendar } from "@/components/ui/calendar"
+
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
+
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import { useRef, useState } from "react"
+
+
 export default function ServiceSelectorBasicForm() {
+    const [gender, setGender] = useState<string[]>([]);
+    const [date, setDate] = useState<Date | undefined>();
+    const [time, setTime] = useState("");
+    const timeRef = useRef<HTMLInputElement>(null)
+
+const openTimePicker = () => {
+  timeRef.current?.focus()
+  timeRef.current?.showPicker?.() // bonus (Chrome mobile/desktop)
+}
+
+    const handleCheckboxGender = (value: string) => {
+        setGender((prev) =>
+            prev.includes(value)
+                ? prev.filter((item) => item !== value)
+                : [...prev, value])
+    }
     return (
         <>
-        <form action="">
-            <div>
-            <label htmlFor="">namr</label>
-            <input type="text" placeholder="isikan nama"/>
-            </div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat cumque quidem nobis repellat harum architecto corporis odit sint sit alias possimus consequatur doloribus voluptatum est natus temporibus, quisquam laboriosam! Voluptates officia perferendis architecto sequi nemo delectus, quo distinctio alias ut nihil quam saepe incidunt recusandae officiis eveniet! Iure reprehenderit amet, enim nulla odit eaque? Ullam dolor quidem maiores, recusandae impedit animi, similique aliquid vero qui minima placeat veniam eum doloremque nobis dolorum! Deserunt praesentium tempora fugiat dicta laborum! Consectetur libero eos nemo hic obcaecati ad facilis fugit odio? Tempore soluta architecto totam fugiat reprehenderit aspernatur, illo dolore culpa praesentium aperiam sint ex officiis, modi expedita omnis dicta temporibus perferendis optio. Praesentium nostrum quod repudiandae facere eum debitis sint asperiores! Placeat eaque, reiciendis nemo animi sit voluptas laudantium iure quisquam nihil cupiditate, ipsam debitis mollitia repellendus. Quis molestias dolor iste ea cumque, placeat quaerat aut deleniti error aliquam minus nostrum impedit facilis. Aliquam laudantium doloremque pariatur repellendus, cupiditate nesciunt perferendis possimus, labore natus ex ipsa magnam repellat optio laboriosam dicta exercitationem molestiae tempore a unde atque. Quasi eveniet atque deserunt vero eligendi incidunt aperiam itaque, explicabo voluptas quod, nisi quo aut cumque ea? Modi sed quisquam cupiditate libero, fugiat et soluta. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, voluptatum? Ab accusantium harum natus numquam in a eaque corrupti. Labore repellat saepe rem quasi provident quo commodi magni! Architecto voluptate corrupti est amet beatae autem eaque maxime harum, libero quam atque ipsum modi illo velit fuga quae eius nam quo, non accusantium iste nemo laudantium? Vero praesentium delectus reiciendis fugiat debitis eum consectetur doloremque dolorem quibusdam eveniet provident voluptate nulla nisi sed laborum voluptatibus quam aut, ut, fuga consequatur molestiae sint esse distinctio animi. Sequi obcaecati minima necessitatibus. Eaque quia voluptas est cum. Debitis officia dolorem impedit illo magni laborum blanditiis cumque voluptate non natus? Dolor, ratione quas labore iste, possimus porro repellendus delectus soluta dolore hic voluptate optio aut voluptatem atque commodi aliquid aliquam impedit vitae. Molestias, accusantium illum minus distinctio cum neque, doloremque ipsam ducimus pariatur praesentium perferendis voluptatem omnis sed dolores et a hic. Et quidem ipsa iusto quisquam dolore quod voluptatum hic natus accusamus. Quis in unde omnis tenetur obcaecati illo sapiente? Odit impedit adipisci perspiciatis possimus, nesciunt ipsa sed necessitatibus nulla, reiciendis doloribus aspernatur in ea accusamus doloremque, eum expedita error tempora aperiam hic. Deserunt odit impedit et iste commodi architecto minima incidunt tenetur ab?
-            <div>
-                <button type="submit">Kirim</button>
-            </div>
-        </form>
+            <form action="">
+                <section>
+                    <div className="flex flex-col justify-start ">
+                        <h2 className="text-3xl font-semibold">Form Reservasi Samarinda Home Spa</h2>
+                        <p className="mt-2 text-lg font-light">FAQ : </p>
+                        <p className="mt-2 text-lg font-light">- Jam Operasional : 08.00 - 21.00 </p>
+                        <p className="mt-2 text-lg font-light">- Booking minimal 1 jam sebelumnya</p>
+                        <p className="mt-2 text-lg font-light">- Free ongkos Transport</p>
+                        <p className="mt-2 text-lg font-light">- Perlengakapan yang disediakan : Oil/Cream Massage, Kain alas & penutup badan, dan Handuk kecil</p>
+                    </div>
+                </section>
+                <section className="mt-8">
+                    <div className="md:flex w-full gap-4">
+                        <div className="flex flex-col w-full">
+                            <label htmlFor="" className="text-xl mb-2">Nama <span className="text-red-600">*</span></label>
+                            <input
+                                className="border-2 h-12 w-full p-4 rounded-md"
+                                type="text" placeholder="Masukan Nama Treatment" />
+                        </div>
+                        <div className="flex flex-col w-full">
+                            <label className="text-xl mb-2"
+                                htmlFor="">Level Treatment <span className="text-red-600">*</span></label>
+                            <input
+                                className="border-2 h-12 w-full p-4 rounded-md"
+                                type="text" placeholder="Masukan Level Treatment" />
+                        </div>
+                    </div>
+                    <div className="flex flex-col w-full mt-4 md:mt-8">
+                        <label htmlFor="" className="mb-2 text-xl">Gender <span className="text-red-600">*</span></label>
+                        <p className="text-sm text-gray-500 mb-1">Jika lebih dari 1 orang dan berbeda gender seperti pasangan suami istri, harap dicentang keduanya</p>
+                        <label
+                            className={
+                                `flex justify-start items-center gap-6 w-full border-2 rounded-md h-12 py-2 px-8 mb-4 cursor-pointer
+                        ${gender.includes("pria") ? 'border-4 border-[#8B6B52] text-[#9D8B7F]' : ''
+                                }`
+
+                            }
+                        >
+                            <Checkbox
+                                id="pria"
+                                checked={gender.includes("pria")}
+                                onCheckedChange={() => handleCheckboxGender("pria")}
+                                className="data-[state=checked]:bg-[#8B6B52] data-[state=checked]:border-[#C9A882] w-5 h-5"
+                            />
+                            <span
+                                className="text-xl"
+                            >Pria</span>
+                        </label>
+                        <label
+                            className={
+                                `flex justify-start items-center gap-6 w-full border-2 rounded-md h-12 py-2 px-8 cursor-pointer
+                        ${gender.includes("wanita") ? 'border-4 border-[#8B6B52] text-[#9D8B7F]' : ''
+                                }`
+
+                            }
+                        >
+                            <Checkbox
+                                id="wanita"
+                                checked={gender.includes("wanita")}
+                                onCheckedChange={() => handleCheckboxGender("wanita")}
+                                className="data-[state=checked]:bg-[#8B6B52] data-[state=checked]:border-[#C9A882] w-5 h-5"
+                            />
+                            <span
+                                className="text-xl"
+                            >Wanita</span>
+                        </label>
+                    </div>
+                    <div className="md:flex w-full mt-4 md:mt-8">
+                        <div className="flex flex-col w-full">
+                            <label htmlFor="" className="text-xl mb-2">Alamat Lengkap  <span className="text-red-600">*</span></label>
+                            <textarea
+                                className="border-2 h-32 w-full p-4 rounded-md"
+                                placeholder="Masukkan Alamat Lengkap" />
+                        </div>
+                    </div>
+                    <div className="md:flex w-full mt-4 md:mt-8">
+                        <div className="flex flex-col w-full">
+                            <label htmlFor="" className="text-xl mb-2">Jadwal Treatment <span className="text-red-600">*</span></label>
+                            {/* date expectected start */}
+                            {/* tanggal */}
+                            <div className="flex flex-col gap-2">
+                                <label htmlFor="date">Tanggal Treatment</label>
+
+                                <Popover>
+                                    <PopoverTrigger asChild>
+                                        <Button
+                                            variant="outline"
+                                            className="justify-start text-left font-normal"
+                                        >
+                                            {date ? date.toDateString()  : "Pilih tanggal"}
+                                        </Button>
+                                    </PopoverTrigger>
+
+                                    <PopoverContent className="w-auto p-0">
+                                        <Calendar
+                                        id="date"
+                                            mode="single"
+                                            selected={date}
+                                            onSelect={setDate}
+                                        />
+                                    </PopoverContent>
+                                </Popover>
+                            </div>
+
+                            {/* jam */}
+                            <div className="flex flex-col gap-2 cursor-pointer"
+                            onClick={openTimePicker}
+                            >
+                                <label>Jam Treatment</label>
+                                <input
+                                ref={timeRef}
+                                    type="time"
+                                    value={time}
+                                    onChange={(e) => setTime(e.target.value)}
+                                    className="border rounded-md h-10 px-3"
+                                />
+                            </div>
+
+                            {/* date expectected end */}
+                        </div>
+                    </div>
+                </section>
+                <div>
+                    <button type="submit">Kirim</button>
+                </div>
+            </form>
         </>
     )
 }
