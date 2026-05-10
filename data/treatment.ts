@@ -252,7 +252,7 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     kode: "N2",
-    nama: "Kombinasi Leher Punggung Bahu",
+    nama: "Kombinasi Kepala Punggung Bahu",
     area: "Upper",
     level: "Normal",
     harga: {

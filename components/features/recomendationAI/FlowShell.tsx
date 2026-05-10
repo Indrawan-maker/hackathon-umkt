@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import StepLevel from "@/components/atoms/Flows/StepLevel";
-import StepKeluhan from "@/components/atoms/Flows/StepKeluhan";
-import StepDurasi from "@/components/atoms/Flows/StepDurasi";
-import StepResult from "@/components/atoms/Flows/StepResult";
+import StepLevel from "@/components/features/recomendationAI/StepLevel";
+import StepKeluhan from "@/components/features/recomendationAI/StepKeluhan";
+import StepDurasi from "@/components/features/recomendationAI/StepDurasi";
+import StepResult from "@/components/features/recomendationAI/StepResult";
 import type { Result } from "@/types/flow";
 
 export default function FlowShell() {

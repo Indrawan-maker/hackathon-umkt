@@ -1,11 +1,21 @@
-import type { Result } from "@/types/flow";
+import type { Result, Treatment } from "@/types/flow";
+import { formatPrice } from "@/utils/formatRupiah";
 
 interface Props {
   result: Result;
 }
 
-const formatPrice = (price?: number | null) =>
-  price ? `Rp ${price.toLocaleString("id-ID")}` : "-";
+const handleBooking = (treatment: Treatment, durasi: number) => {
+  const params = new URLSearchParams({
+    treatment: treatment.nama,
+    level: treatment.level,
+    durasi: String(durasi),
+    harga: String(treatment.harga_durasi),
+  });
+
+  window.location.href = `/form?${params.toString()}`;
+};
+
 
 export default function StepResult({ result }: Props) {
   return (
@@ -41,7 +51,9 @@ export default function StepResult({ result }: Props) {
           </div>
         </div>
 
-        <button className="w-full py-3 rounded-2xl bg-stone-800 text-white text-sm font-medium hover:bg-stone-700">
+        <button
+          onClick={() => handleBooking(result.treatment, result.durasi)}
+          className="w-full py-3 rounded-2xl bg-stone-800 text-white text-sm font-medium hover:bg-stone-700">
           Booking sekarang
         </button>
       </div>
@@ -71,7 +83,9 @@ export default function StepResult({ result }: Props) {
                   <p className="text-sm font-semibold text-stone-800">
                     {formatPrice(t.harga_durasi)}
                   </p>
-                  <button className="w-full py-2 px-4 bg-stone-800 text-white text-xs font-medium rounded-xl hover:bg-stone-700 transition">
+                  <button
+                    onClick={() => handleBooking(t, result.durasi)}
+                    className="w-full py-2 px-4 bg-stone-800 text-white text-xs font-medium rounded-xl hover:bg-stone-700 transition">
                     Booking
                   </button>
                 </div>
