@@ -62,6 +62,8 @@ Nama: ${namaPengunjung}
 Gender: ${gender}
 Alamat: ${alamat}
 No HP: ${nohp}
+Tanggal: ${date}
+Jam: ${time}
 Metode Pembayaran: ${payment}
 ${catatan ? `Catatan: ${catatan}` : ""}
 
