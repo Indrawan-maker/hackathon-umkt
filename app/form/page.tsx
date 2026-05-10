@@ -1,5 +1,10 @@
 import BookingForm from "@/components/features/formAI/BookingForm";
+import { Suspense } from "react";
 
 export default function BookingFormPage() {
-  return <BookingForm />;
+  return(
+  <Suspense fallback={<div>Loading...</div>}>
+      <BookingForm />
+    </Suspense>
+    )
 }

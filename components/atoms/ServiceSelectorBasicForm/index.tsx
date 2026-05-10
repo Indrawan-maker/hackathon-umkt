@@ -46,7 +46,7 @@ const openTimePicker = () => {
                 <section className="mt-8">
                     <div className="md:flex w-full gap-4">
                         <div className="flex flex-col w-full">
-                            <label htmlFor="" className="text-xl mb-2">Nama <span className="text-red-600">*</span></label>
+                            <label htmlFor="" className="text-xl mb-2">Nama Treatment<span className="text-red-600">*</span></label>
                             <input
                                 className="border-2 h-12 w-full p-4 rounded-md"
                                 type="text" placeholder="Masukan Nama Treatment" />
@@ -59,7 +59,23 @@ const openTimePicker = () => {
                                 type="text" placeholder="Masukan Level Treatment" />
                         </div>
                     </div>
-                    <div className="flex flex-col w-full mt-4 md:mt-8">
+                    <div className="md:flex w-full gap-4 mt-8">
+                        <div className="flex flex-col w-full">
+                            <label htmlFor="" className="text-xl mb-2">Durasi Treatment<span className="text-red-600">*</span></label>
+                            <input
+                                className="border-2 h-12 w-full p-4 rounded-md"
+                                type="text" placeholder="Masukan Nama Treatment" />
+                        </div>
+                    </div>
+                    <div className="md:flex w-full gap-4 mt-8">
+                        <div className="flex flex-col w-full">
+                            <label htmlFor="" className="text-xl mb-2">Harga Treatment<span className="text-red-600">*</span></label>
+                            <input
+                                className="border-2 h-12 w-full p-4 rounded-md"
+                                type="text" placeholder="Masukan Nama Treatment" />
+                        </div>
+                    </div>
+                    <div className="flex flex-col w-full mt-8">
                         <label htmlFor="" className="mb-2 text-xl">Gender <span className="text-red-600">*</span></label>
                         <p className="text-sm text-gray-500 mb-1">Jika lebih dari 1 orang dan berbeda gender seperti pasangan suami istri, harap dicentang keduanya</p>
                         <label
@@ -67,7 +83,6 @@ const openTimePicker = () => {
                                 `flex justify-start items-center gap-6 w-full border-2 rounded-md h-12 py-2 px-8 mb-4 cursor-pointer
                         ${gender.includes("pria") ? 'border-4 border-[#8B6B52] text-[#9D8B7F]' : ''
                                 }`
-
                             }
                         >
                             <Checkbox
@@ -99,7 +114,7 @@ const openTimePicker = () => {
                             >Wanita</span>
                         </label>
                     </div>
-                    <div className="md:flex w-full mt-4 md:mt-8">
+                    <div className="md:flex w-full mt-8">
                         <div className="flex flex-col w-full">
                             <label htmlFor="" className="text-xl mb-2">Alamat Lengkap  <span className="text-red-600">*</span></label>
                             <textarea
@@ -107,21 +122,19 @@ const openTimePicker = () => {
                                 placeholder="Masukkan Alamat Lengkap" />
                         </div>
                     </div>
-                    <div className="md:flex w-full mt-4 md:mt-8">
+                    <div className="md:flex w-full mt-8">
                         <div className="flex flex-col w-full">
                             <label htmlFor="" className="text-xl mb-2">Jadwal Treatment <span className="text-red-600">*</span></label>
                             {/* date expectected start */}
                             {/* tanggal */}
-                            <div className="flex flex-col gap-2">
-                                <label htmlFor="date">Tanggal Treatment</label>
-
+                            <div className="flex flex-col gap-2 mt-2">
                                 <Popover>
                                     <PopoverTrigger asChild>
                                         <Button
                                             variant="outline"
-                                            className="justify-start text-left font-normal"
+                                            className="justify-start text-left font-normal h-12"
                                         >
-                                            {date ? date.toDateString()  : "Pilih tanggal"}
+                                            {date ? date.toLocaleDateString('id-ID')  : "Pilih tanggal"}
                                         </Button>
                                     </PopoverTrigger>
 
@@ -137,16 +150,15 @@ const openTimePicker = () => {
                             </div>
 
                             {/* jam */}
-                            <div className="flex flex-col gap-2 cursor-pointer"
+                            <div className="flex flex-col gap-2 cursor-pointer mt-8"
                             onClick={openTimePicker}
                             >
-                                <label>Jam Treatment</label>
                                 <input
                                 ref={timeRef}
                                     type="time"
                                     value={time}
                                     onChange={(e) => setTime(e.target.value)}
-                                    className="border rounded-md h-10 px-3"
+                                    className="border rounded-md h-12 px-3"
                                 />
                             </div>
 
