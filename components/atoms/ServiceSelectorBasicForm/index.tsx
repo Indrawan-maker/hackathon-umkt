@@ -98,7 +98,7 @@ Terima kasih.
                 </section>
                 <section className="mt-8">
                     {/* dialog  start */}
-                    <div className="gap-4 grid grid-cols-1 md:grid-cols-3">
+                    <div className="gap-4 grid grid-cols-1 md:grid-cols-3 justify-items-center">
                         {TREATMENTS.map((item) => (
                             <Dialog key={item.kode}>
                                 <DialogTrigger asChild>
