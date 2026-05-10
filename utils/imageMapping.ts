@@ -1,4 +1,3 @@
-import abu from '@/public/images/anatomy/default.webp'
 import kepala from '@/public/images/anatomy/kepala.webp'
 import punggung from '@/public/images/anatomy/punggung.webp'
 import lengan from '@/public/images/anatomy/lengan.webp'

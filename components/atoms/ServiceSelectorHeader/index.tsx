@@ -28,6 +28,7 @@ export default function ServiceSelectorHeader() {
                             >
                                 <div className="cursor-pointer">
                                     <button
+                                    type="button"
                                         className="cursor-pointer">
                                         Rekomendasi Ai
                                     </button>
@@ -40,6 +41,7 @@ export default function ServiceSelectorHeader() {
                             >
                                 <div className="cursor-pointer">
                                     <button
+                                    type="button"
                                         className="cursor-pointer">Manual Form</button>
                                 </div>
                             </div>

@@ -8,21 +8,74 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useRef, useState } from "react"
+import { TREATMENTS } from "@/data/treatment"
+import { option } from "framer-motion/client"
+import CardDurasiHargaList from "@/components/moleculs/CardDurasiHargaList"
 
 
 export default function ServiceSelectorBasicForm() {
+    const [namaTreatment, setNamaTreatment] = useState('')
+    const [levelTreatment, setLevelTreatment] = useState('')
+    const [durasiTreatment, setDurasiTreatment] = useState('')
+    const [hargaTreatment, setHargaTreatment] = useState('')
+    const [namaPengunjung, setNamaPengunjung] = useState('')
+    const [alamat, setAlamat] = useState('')
+    const [nohp, setNohp] = useState('')
+    const [catatan, setCatatan] = useState('')
     const [gender, setGender] = useState<string[]>([]);
+    const [payment, setPayment] = useState<string>('');
     const [date, setDate] = useState<Date | undefined>();
     const [time, setTime] = useState("");
     const timeRef = useRef<HTMLInputElement>(null)
+    const cardListRef = useRef<HTMLDivElement>(null)
 
-const openTimePicker = () => {
-  timeRef.current?.focus()
-  timeRef.current?.showPicker?.() // bonus (Chrome mobile/desktop)
-}
+    const openTimePicker = () => {
+        timeRef.current?.focus()
+        timeRef.current?.showPicker?.() // bonus (Chrome mobile/desktop)
+    }
+
+    const handleSubmit = () => {
+        const message = `
+Form Reservasi De Home SPA
+
+*Data Pelanggan*
+Nama: ${namaPengunjung}
+Gender: ${gender}
+Alamat: ${alamat}
+No HP: ${nohp}
+Metode Pembayaran: ${payment}
+${catatan ? `Catatan: ${catatan}` : ""}
+
+*Detail Treatment*
+Treatment: ${namaTreatment}
+Level: ${levelTreatment}
+Durasi: ${durasiTreatment} menit
+Harga: ${hargaTreatment}
+
+Terima kasih.
+    `.trim();
+
+        window.open(`https://wa.me/6289689346487?text=${encodeURIComponent(message)}`, "_blank");
+    };
 
     const handleCheckboxGender = (value: string) => {
         setGender((prev) =>
@@ -44,37 +97,86 @@ const openTimePicker = () => {
                     </div>
                 </section>
                 <section className="mt-8">
-                    <div className="md:flex w-full gap-4">
+                    {/* dialog  start */}
+                    <div className="gap-4 grid grid-cols-2 md:grid-cols-3">
+                        {TREATMENTS.map((item) => (
+                            <Dialog key={item.kode}>
+                                <DialogTrigger asChild>
+                                    <CardDurasiHargaList
+                                        className={
+                                            namaTreatment === item.nama
+                                                ? "ring-4 ring-blue-500 rounded-2xl"
+                                                : ""
+                                        }
+                                        name={item.nama}
+                                        hargaList={
+                                            namaTreatment === item.nama
+                                                ? {
+                                                    [Number(durasiTreatment)]:
+                                                        Number(hargaTreatment),
+                                                }
+                                                : item.harga
+                                        }
+
+                                    />
+                                </DialogTrigger>
+
+                                <DialogContent  className="max-w-2xl min-h-75 rounded-2xl">
+                                    <DialogHeader>
+                                        <DialogTitle>{item.nama}</DialogTitle>
+                                    </DialogHeader>
+
+                                    <Select
+                                        value={durasiTreatment}
+                                        onValueChange={(value) => {
+                                            setDurasiTreatment(value)
+                                            setHargaTreatment(item.harga[Number(value)].toString())
+                                            setNamaTreatment(item.nama)
+                                            setLevelTreatment(item.level)
+                                        
+                                        }}
+
+                                    >
+                                        <SelectTrigger className="w-full">
+                                            <SelectValue placeholder="Pilih durasi" />
+                                        </SelectTrigger>
+
+                                        <SelectContent>
+                                            {Object.entries(item.harga).map(
+                                                ([durasi, harga]) => (
+                                                    <SelectItem
+                                                        key={durasi}
+                                                        value={durasi}
+                                                    >
+                                                        {durasi} Menit - Rp{" "}
+                                                        {harga.toLocaleString("id-ID")}
+                                                    </SelectItem>
+                                                )
+                                            )}
+                                        </SelectContent>
+                                    </Select>
+                                </DialogContent>
+                            </Dialog>
+                        ))}
+                    </div>
+                    {/* dialog  end */}
+
+
+                    {/* pisah isi */}
+                    <div className="md:flex w-full mt-8">
                         <div className="flex flex-col w-full">
-                            <label htmlFor="" className="text-xl mb-2">Nama Treatment<span className="text-red-600">*</span></label>
+                            <label htmlFor="" className="text-xl mb-2">Nama Pengunjung<span className="text-red-600">*</span></label>
                             <input
                                 className="border-2 h-12 w-full p-4 rounded-md"
-                                type="text" placeholder="Masukan Nama Treatment" />
-                        </div>
-                        <div className="flex flex-col w-full">
-                            <label className="text-xl mb-2"
-                                htmlFor="">Level Treatment <span className="text-red-600">*</span></label>
-                            <input
-                                className="border-2 h-12 w-full p-4 rounded-md"
-                                type="text" placeholder="Masukan Level Treatment" />
+                                type="text"
+                                value={namaPengunjung}
+                                onChange={(e) => setNamaPengunjung(e.target.value)}
+                                placeholder="Masukan Nama Pengunjung"
+                            />
                         </div>
                     </div>
-                    <div className="md:flex w-full gap-4 mt-8">
-                        <div className="flex flex-col w-full">
-                            <label htmlFor="" className="text-xl mb-2">Durasi Treatment<span className="text-red-600">*</span></label>
-                            <input
-                                className="border-2 h-12 w-full p-4 rounded-md"
-                                type="text" placeholder="Masukan Nama Treatment" />
-                        </div>
-                    </div>
-                    <div className="md:flex w-full gap-4 mt-8">
-                        <div className="flex flex-col w-full">
-                            <label htmlFor="" className="text-xl mb-2">Harga Treatment<span className="text-red-600">*</span></label>
-                            <input
-                                className="border-2 h-12 w-full p-4 rounded-md"
-                                type="text" placeholder="Masukan Nama Treatment" />
-                        </div>
-                    </div>
+
+                    {/* gender */}
                     <div className="flex flex-col w-full mt-8">
                         <label htmlFor="" className="mb-2 text-xl">Gender <span className="text-red-600">*</span></label>
                         <p className="text-sm text-gray-500 mb-1">Jika lebih dari 1 orang dan berbeda gender seperti pasangan suami istri, harap dicentang keduanya</p>
@@ -114,6 +216,7 @@ const openTimePicker = () => {
                             >Wanita</span>
                         </label>
                     </div>
+
                     <div className="md:flex w-full mt-8">
                         <div className="flex flex-col w-full">
                             <label htmlFor="" className="text-xl mb-2">Alamat Lengkap  <span className="text-red-600">*</span></label>
@@ -122,6 +225,7 @@ const openTimePicker = () => {
                                 placeholder="Masukkan Alamat Lengkap" />
                         </div>
                     </div>
+
                     <div className="md:flex w-full mt-8">
                         <div className="flex flex-col w-full">
                             <label htmlFor="" className="text-xl mb-2">Jadwal Treatment <span className="text-red-600">*</span></label>
@@ -134,13 +238,12 @@ const openTimePicker = () => {
                                             variant="outline"
                                             className="justify-start text-left font-normal h-12"
                                         >
-                                            {date ? date.toLocaleDateString('id-ID')  : "Pilih tanggal"}
+                                            {date ? date.toLocaleDateString('id-ID') : "Pilih tanggal"}
                                         </Button>
                                     </PopoverTrigger>
-
                                     <PopoverContent className="w-auto p-0">
                                         <Calendar
-                                        id="date"
+                                            id="date"
                                             mode="single"
                                             selected={date}
                                             onSelect={setDate}
@@ -151,23 +254,66 @@ const openTimePicker = () => {
 
                             {/* jam */}
                             <div className="flex flex-col gap-2 cursor-pointer mt-8"
-                            onClick={openTimePicker}
+                                onClick={openTimePicker}
                             >
                                 <input
-                                ref={timeRef}
+                                    ref={timeRef}
                                     type="time"
                                     value={time}
                                     onChange={(e) => setTime(e.target.value)}
                                     className="border rounded-md h-12 px-3"
                                 />
+                                <p className="text-sm text-gray-500 mb-1">Harap reservasi 1 jam sebelumnya</p>
                             </div>
 
-                            {/* date expectected end */}
+                        </div>
+                    </div>
+
+                    {/* date expectected end */}
+                    <div className="mt-4">
+                        <label className="text-xl">Metode Pembayaran</label>
+                        <select
+                            value={payment}
+                            onChange={(e) => setPayment(e.target.value)}
+                            className="w-full h-12 rounded-md border border-stone-200 px-4 py-3 text-sm outline-none focus:border-stone-400 mt-4"
+                        >
+                            <option>Cash</option>
+                            <option>Transfer Bank</option>
+                            <option>QR</option>
+                        </select>
+                    </div>
+
+                    <div className="md:flex w-full mt-8">
+                        <div className="flex flex-col w-full">
+                            <label htmlFor="" className="text-xl mb-2">Nama Pengunjung<span className="text-red-600">*</span></label>
+                            <input
+                                className="border-2 h-12 w-full p-4 rounded-md"
+                                type="tel"
+                                value={nohp}
+                                onChange={(e) => setNohp(e.target.value)}
+                                placeholder="08xxxxxxx"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="md:flex w-full mt-8">
+                        <div className="flex flex-col w-full">
+                            <label htmlFor="" className="text-xl mb-2">Catatan :</label>
+                            <textarea
+                                value={catatan}
+                                onChange={(e) => setCatatan(e.target.value)}
+                                className="border-2 h-32 w-full p-4 rounded-md"
+                                placeholder="Masukkan Catatan" />
                         </div>
                     </div>
                 </section>
-                <div>
-                    <button type="submit">Kirim</button>
+                <div className="mt-12 flex justify-end">
+                    <button
+                        type="button"
+                        onClick={handleSubmit}
+                        className={`w-full h-12 rounded-md bg-[#C9A882] text-white`}>
+                        Kirim
+                    </button>
                 </div>
             </form>
         </>
