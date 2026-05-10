@@ -1,5 +1,5 @@
 "use client"
-import { serviceSpaData } from "@/api/spaService"
+import { serviceSpaData } from "@/app/api/spaService"
 import CardSpa from "@/components/atoms/CardSpa"
 import { motion } from 'framer-motion';
 

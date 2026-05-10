@@ -4,7 +4,7 @@ export const TREATMENTS: Treatment[] = [
   // treatemnt kepala
   {
     kode: "A1",
-    nama: "Totok & Head Massage",
+    nama: "Totok & Pijat Kepala",
     area: "Kepala",
     level: "Lembut",
     harga: {
@@ -16,7 +16,7 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     kode: "A2",
-    nama: "Scalp Aromatherapy",
+    nama: "Aromaterapi Kulit Kepala",
     area: "Kepala",
     level: "Lembut",
     harga: {
@@ -28,7 +28,7 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     kode: "B1",
-    nama: "Head & Neck Relief",
+    nama: "Relaksasi Kepala & Leher",
     area: "Kepala",
     level: "Normal",
     harga: {
@@ -40,7 +40,7 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     kode: "C1",
-    nama: "Migraine Relief Therapy",
+    nama: "Terapi Reda Migrain",
     area: "Kepala",
     level: "Keras",
     harga: {
@@ -54,7 +54,7 @@ export const TREATMENTS: Treatment[] = [
   // treatement kaki
   {
     kode: "D1",
-    nama: "Foot Reflexology",
+    nama: "Refleksi Kaki",
     area: "Kaki",
     level: "Lembut",
     harga: {
@@ -66,7 +66,7 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     kode: "E1",
-    nama: "Leg & Foot Massage",
+    nama: "Pijat Kaki & Betis",
     area: "Kaki",
     level: "Normal",
     harga: {
@@ -78,7 +78,7 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     kode: "E2",
-    nama: "Leg & Refleksi Combo",
+    nama: "Kombinasi Kaki & Refleksi",
     area: "Kaki",
     level: "Normal",
     harga: {
@@ -90,7 +90,7 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     kode: "F1",
-    nama: "Sport Leg Therapy",
+    nama: "Terapi Otot Kaki Sport",
     area: "Kaki",
     level: "Keras",
     harga: {
@@ -104,7 +104,7 @@ export const TREATMENTS: Treatment[] = [
   // treatment tangan
   {
     kode: "G1",
-    nama: "Hand & Arm Relaxation",
+    nama: "Relaksasi Tangan & Lengan",
     area: "Tangan",
     level: "Lembut",
     harga: {
@@ -116,7 +116,7 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     kode: "H1",
-    nama: "Arm & Shoulder Massage",
+    nama: "Pijat Lengan & Bahu",
     area: "Tangan",
     level: "Normal",
     harga: {
@@ -128,7 +128,7 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     kode: "H2",
-    nama: "Arm & Neck Combo",
+    nama: "Kombinasi Lengan & Leher",
     area: "Tangan",
     level: "Normal",
     harga: {
@@ -140,7 +140,7 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     kode: "I1",
-    nama: "Deep Arm & Shoulder Press",
+    nama: "Tekanan Dalam Lengan & Bahu",
     area: "Tangan",
     level: "Keras",
     harga: {
@@ -154,7 +154,7 @@ export const TREATMENTS: Treatment[] = [
   // punggung
   {
     kode: "J1",
-    nama: "Back Relaxation Massage",
+    nama: "Relaksasi Punggung",
     area: "Punggung",
     level: "Lembut",
     harga: {
@@ -166,7 +166,7 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     kode: "K1",
-    nama: "Back & Waist Massage",
+    nama: "Pijat Punggung & Pinggang",
     area: "Punggung",
     level: "Normal",
     harga: {
@@ -178,7 +178,7 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     kode: "K2",
-    nama: "Back & Shoulder Combo",
+    nama: "Kombinasi Punggung & Bahu",
     area: "Punggung",
     level: "Normal",
     harga: {
@@ -202,7 +202,7 @@ export const TREATMENTS: Treatment[] = [
   },
   {
     kode: "L2",
-    nama: "Back Kerokan & Deep Massage",
+    nama: "Kerokan & Pijat Dalam Punggung",
     area: "Punggung",
     level: "Keras",
     harga: {
@@ -215,8 +215,8 @@ export const TREATMENTS: Treatment[] = [
 
   // treatment upper
   {
-    kode: "P1",
-    nama: "Upper Body Relaxation",
+    kode: "M1",
+    nama: "Relaksasi Upper Body",
     area: "Upper",
     level: "Lembut",
     harga: {
@@ -227,8 +227,8 @@ export const TREATMENTS: Treatment[] = [
     },
   },
   {
-    kode: "P2",
-    nama: "Upper Aromatherapy Care",
+    kode: "M2",
+    nama: "Aromaterapi Upper Body",
     area: "Upper",
     level: "Lembut",
     harga: {
@@ -239,8 +239,8 @@ export const TREATMENTS: Treatment[] = [
     },
   },
   {
-    kode: "Q1",
-    nama: "Upper Body Recovery",
+    kode: "N1",
+    nama: "Pemulihan Upper Body",
     area: "Upper",
     level: "Normal",
     harga: {
@@ -251,8 +251,8 @@ export const TREATMENTS: Treatment[] = [
     },
   },
   {
-    kode: "Q2",
-    nama: "Neck Back Shoulder Combo",
+    kode: "N2",
+    nama: "Kombinasi Leher Punggung Bahu",
     area: "Upper",
     level: "Normal",
     harga: {
@@ -263,8 +263,8 @@ export const TREATMENTS: Treatment[] = [
     },
   },
   {
-    kode: "R1",
-    nama: "Upper Deep Tissue Therapy",
+    kode: "O1",
+    nama: "Terapi Deep Tissue Upper",
     area: "Upper",
     level: "Keras",
     harga: {
@@ -275,8 +275,8 @@ export const TREATMENTS: Treatment[] = [
     },
   },
   {
-    kode: "R2",
-    nama: "Upper Muscle Recovery Press",
+    kode: "O2",
+    nama: "Tekanan Pemulihan Otot Upper",
     area: "Upper",
     level: "Keras",
     harga: {
@@ -289,8 +289,8 @@ export const TREATMENTS: Treatment[] = [
 
   // tretment full badan
   {
-    kode: "M1",
-    nama: "Aromatherapy Full Body",
+    kode: "P1",
+    nama: "Aromaterapi Full Body",
     area: "Full Badan",
     level: "Lembut",
     harga: {
@@ -301,8 +301,8 @@ export const TREATMENTS: Treatment[] = [
     },
   },
   {
-    kode: "N1",
-    nama: "Full Body Massage & Scrub",
+    kode: "Q1",
+    nama: "Pijat & Scrub Full Body",
     area: "Full Badan",
     level: "Normal",
     harga: {
@@ -313,8 +313,8 @@ export const TREATMENTS: Treatment[] = [
     },
   },
   {
-    kode: "O1",
-    nama: "Full Body Deep & Kerokan",
+    kode: "R1",
+    nama: "Deep Massage & Kerokan Full Body",
     area: "Full Badan",
     level: "Keras",
     harga: {
