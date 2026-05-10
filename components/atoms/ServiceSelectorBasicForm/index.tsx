@@ -235,6 +235,7 @@ Terima kasih.
                             {/* date expectected start */}
                             {/* tanggal */}
                             <div className="flex flex-col gap-2 mt-2">
+                                <label className="">Tanggal Treatment</label>
                                 <Popover>
                                     <PopoverTrigger asChild>
                                         <Button
@@ -259,6 +260,7 @@ Terima kasih.
                             <div className="flex flex-col gap-2 cursor-pointer mt-8"
                                 onClick={openTimePicker}
                             >
+                                <label>Jam Treatment</label>
                                 <input
                                     ref={timeRef}
                                     type="time"
