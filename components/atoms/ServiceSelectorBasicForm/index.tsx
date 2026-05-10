@@ -221,6 +221,9 @@ Terima kasih.
                         <div className="flex flex-col w-full">
                             <label htmlFor="" className="text-xl mb-2">Alamat Lengkap  <span className="text-red-600">*</span></label>
                             <textarea
+                                                            
+                                value={alamat}
+                                onChange={(e) => setAlamat(e.target.value)}
                                 className="border-2 h-32 w-full p-4 rounded-md"
                                 placeholder="Masukkan Alamat Lengkap" />
                         </div>
@@ -285,7 +288,7 @@ Terima kasih.
 
                     <div className="md:flex w-full mt-8">
                         <div className="flex flex-col w-full">
-                            <label htmlFor="" className="text-xl mb-2">Nama Pengunjung<span className="text-red-600">*</span></label>
+                            <label htmlFor="" className="text-xl mb-2">Nohp<span className="text-red-600">*</span></label>
                             <input
                                 className="border-2 h-12 w-full p-4 rounded-md"
                                 type="tel"
