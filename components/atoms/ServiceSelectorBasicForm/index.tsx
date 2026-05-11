@@ -46,11 +46,32 @@ export default function ServiceSelectorBasicForm() {
     const [date, setDate] = useState<Date | undefined>();
     const [time, setTime] = useState("");
     const timeRef = useRef<HTMLInputElement>(null)
+
+    const dataDiriRef = useRef<HTMLDivElement>(null)
     const cardListRef = useRef<HTMLDivElement>(null)
+        const dialogRef = useRef<HTMLButtonElement>(null)
+
+
+    const scrollToDataDiri = () => {
+                closeDialog()
+        setTimeout(() => {
+            dataDiriRef.current?.scrollIntoView({ behavior: 'smooth' })
+        }, 300)
+    }
 
     const openTimePicker = () => {
         timeRef.current?.focus()
         timeRef.current?.showPicker?.() // bonus (Chrome mobile/desktop)
+    }
+        const closeDialog = () => {
+        const escapeEvent = new KeyboardEvent('keydown', {
+            key: 'Escape',
+            code: 'Escape',
+            keyCode: 27,
+            which: 27,
+            bubbles: true,
+        })
+        document.dispatchEvent(escapeEvent)
     }
 
     const handleSubmit = () => {
@@ -123,7 +144,7 @@ Terima kasih.
                                     />
                                 </DialogTrigger>
 
-                                <DialogContent  className="w-md md:max-w-2xl min-h-75 rounded-2xl">
+                                <DialogContent className="w-md md:max-w-2xl min-h-75 rounded-2xl">
                                     <DialogHeader>
                                         <DialogTitle>{item.nama}</DialogTitle>
                                     </DialogHeader>
@@ -135,7 +156,7 @@ Terima kasih.
                                             setHargaTreatment(item.harga[Number(value)].toString())
                                             setNamaTreatment(item.nama)
                                             setLevelTreatment(item.level)
-                                        
+
                                         }}
 
                                     >
@@ -157,6 +178,12 @@ Terima kasih.
                                             )}
                                         </SelectContent>
                                     </Select>
+                                    <Button
+                                        onClick={scrollToDataDiri}
+                                        className="w-full mt-6 bg-[#C9A882] hover:bg-[#B8956A] text-white h-12 rounded-md"
+                                    >
+                                        Pesan Sekarang!
+                                    </Button>
                                 </DialogContent>
                             </Dialog>
                         ))}
@@ -165,7 +192,7 @@ Terima kasih.
 
 
                     {/* pisah isi */}
-                    <div className="md:flex w-full mt-8">
+                    <div className="md:flex w-full mt-8"  ref={dataDiriRef}>
                         <div className="flex flex-col w-full">
                             <label htmlFor="" className="text-xl mb-2">Nama Pengunjung<span className="text-red-600">*</span></label>
                             <input
@@ -223,7 +250,7 @@ Terima kasih.
                         <div className="flex flex-col w-full">
                             <label htmlFor="" className="text-xl mb-2">Alamat Lengkap  <span className="text-red-600">*</span></label>
                             <textarea
-                                                            
+
                                 value={alamat}
                                 onChange={(e) => setAlamat(e.target.value)}
                                 className="border-2 h-32 w-full p-4 rounded-md"
