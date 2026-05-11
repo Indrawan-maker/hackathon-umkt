@@ -189,10 +189,9 @@ Terima kasih.
                         ))}
                     </div>
                     {/* dialog  end */}
-
-
+                    <div className="mb-32" ref={dataDiriRef}></div>
                     {/* pisah isi */}
-                    <div className="md:flex w-full mt-8"  ref={dataDiriRef}>
+                    <div className="md:flex w-full mt-8">
                         <div className="flex flex-col w-full">
                             <label htmlFor="" className="text-xl mb-2">Nama Pengunjung<span className="text-red-600">*</span></label>
                             <input
