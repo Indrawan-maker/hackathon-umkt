@@ -20,6 +20,8 @@ export default function BookingForm() {
   const [alamat, setAlamat] = useState("");
   const [payment, setPayment] = useState("Cash");
   const [catatan, setCatatan] = useState("");
+  const [tanggal, setTanggal] = useState("");
+  const [jam, setJam] = useState("");
 
   return (
     <div className="min-h-screen bg-white px-4 py-10 flex justify-center">
@@ -43,6 +45,8 @@ export default function BookingForm() {
             alamat={alamat} setAlamat={setAlamat}
             payment={payment} setPayment={setPayment}
             catatan={catatan} setCatatan={setCatatan}
+            tanggal={tanggal} setTanggal={setTanggal}
+            jam={jam} setJam={setJam}
           />
 
           <SubmitButton
@@ -56,6 +60,8 @@ export default function BookingForm() {
             level={level}
             durasi={durasi}
             harga={harga}
+            tanggal={tanggal}
+            jam={jam}
           />
         </div>
       </div>
