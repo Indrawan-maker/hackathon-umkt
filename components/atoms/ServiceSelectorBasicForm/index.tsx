@@ -391,10 +391,11 @@ Terima kasih.
                             </Button>
                         </DialogTrigger>
 
-                        <DialogContent className="w-md md:max-w-2xl min-h-75 rounded-2xl">
+                        <DialogContent className="w-md md:max-w-2xl max-h-[85vh] overflow-y-auto rounded-2xl">
                             <DialogHeader>
                                 <DialogTitle className="text-center">Detail Pesanan</DialogTitle>
                             </DialogHeader>
+
                             <section className="space-y-3 text-sm mt-4">
                                 <div className="border rounded-lg p-4 space-y-2">
                                     <h3 className="font-semibold text-lg">Detail Treatment</h3>
@@ -417,6 +418,7 @@ Terima kasih.
                                         <p><span className="font-medium">Catatan:</span> {catatan}</p>
                                     )}
                                 </div>
+
                                 <div>
                                     <label className="text-lg font-medium">Metode Pembayaran</label>
                                     <select
@@ -431,13 +433,15 @@ Terima kasih.
                                 </div>
                             </section>
 
-                            <div className="flex flex-col gap-y-2 mt-auto">
+                            <div className="flex flex-col gap-y-2 mt-4">
                                 <button
                                     type="button"
                                     onClick={handleOrder}
-                                    className={`w-full h-12 rounded-md bg-[#C9A882] text-white`}>
+                                    className="w-full h-12 rounded-md bg-[#C9A882] text-white"
+                                >
                                     Pesan Sekarang!
                                 </button>
+
                                 <DialogClose asChild>
                                     <button
                                         type="button"
