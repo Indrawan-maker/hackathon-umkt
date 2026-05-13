@@ -14,6 +14,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    DialogClose
 } from "@/components/ui/dialog"
 
 import {
@@ -49,21 +50,31 @@ export default function ServiceSelectorBasicForm() {
 
     const dataDiriRef = useRef<HTMLDivElement>(null)
     const cardListRef = useRef<HTMLDivElement>(null)
-        const dialogRef = useRef<HTMLButtonElement>(null)
+    const dialogRef = useRef<HTMLButtonElement>(null)
 
 
     const scrollToDataDiri = () => {
-                closeDialog()
+        closeDialog()
         setTimeout(() => {
             dataDiriRef.current?.scrollIntoView({ behavior: 'smooth' })
         }, 300)
     }
 
+    const isFormComplete =
+        namaTreatment &&
+        durasiTreatment &&
+        namaPengunjung.trim() &&
+        gender.length > 0 &&
+        alamat.trim() &&
+        date &&
+        time &&
+        nohp.trim()
+
     const openTimePicker = () => {
         timeRef.current?.focus()
         timeRef.current?.showPicker?.() // bonus (Chrome mobile/desktop)
     }
-        const closeDialog = () => {
+    const closeDialog = () => {
         const escapeEvent = new KeyboardEvent('keydown', {
             key: 'Escape',
             code: 'Escape',
@@ -73,6 +84,30 @@ export default function ServiceSelectorBasicForm() {
         })
         document.dispatchEvent(escapeEvent)
     }
+
+    const generatePaymentLink = async () => {
+        const res = await fetch("/api/payment", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nama: namaPengunjung,
+                nohp,
+                treatment: namaTreatment,
+                total: Number(hargaTreatment),
+                payment,
+            }),
+        })
+
+        const data = await res.json()
+
+        if (data.payment_url) {
+            window.open(data.payment_url, "_blank")
+        }
+    }
+
+
 
     const handleSubmit = () => {
         const message = `
@@ -99,6 +134,19 @@ Terima kasih.
 
         window.open(`https://wa.me/6289689346487?text=${encodeURIComponent(message)}`, "_blank");
     };
+    const handleOrder = async () => {
+        if (!payment) {
+            alert("Pilih metode pembayaran")
+            return
+        }
+
+        if (payment === "cash") {
+            handleSubmit()
+            return
+        }
+
+        await generatePaymentLink()
+    }
 
     const handleCheckboxGender = (value: string) => {
         setGender((prev) =>
@@ -182,7 +230,7 @@ Terima kasih.
                                         onClick={scrollToDataDiri}
                                         className="w-full mt-6 bg-[#C9A882] hover:bg-[#B8956A] text-white h-12 rounded-md"
                                     >
-                                        Pesan Sekarang!
+                                        Lanjut isi data diri
                                     </Button>
                                 </DialogContent>
                             </Dialog>
@@ -197,6 +245,7 @@ Terima kasih.
                             <input
                                 className="border-2 h-12 w-full p-4 rounded-md"
                                 type="text"
+                                required
                                 value={namaPengunjung}
                                 onChange={(e) => setNamaPengunjung(e.target.value)}
                                 placeholder="Masukan Nama Pengunjung"
@@ -249,7 +298,7 @@ Terima kasih.
                         <div className="flex flex-col w-full">
                             <label htmlFor="" className="text-xl mb-2">Alamat Lengkap  <span className="text-red-600">*</span></label>
                             <textarea
-
+                                required
                                 value={alamat}
                                 onChange={(e) => setAlamat(e.target.value)}
                                 className="border-2 h-32 w-full p-4 rounded-md"
@@ -279,6 +328,7 @@ Terima kasih.
                                             mode="single"
                                             selected={date}
                                             onSelect={setDate}
+                                            required
                                         />
                                     </PopoverContent>
                                 </Popover>
@@ -292,6 +342,7 @@ Terima kasih.
                                 <input
                                     ref={timeRef}
                                     type="time"
+                                    required
                                     value={time}
                                     onChange={(e) => setTime(e.target.value)}
                                     className="border rounded-md h-12 px-3"
@@ -303,25 +354,13 @@ Terima kasih.
                     </div>
 
                     {/* date expectected end */}
-                    <div className="mt-4">
-                        <label className="text-xl">Metode Pembayaran</label>
-                        <select
-                            value={payment}
-                            onChange={(e) => setPayment(e.target.value)}
-                            className="w-full h-12 rounded-md border border-stone-200 px-4 py-3 text-sm outline-none focus:border-stone-400 mt-4"
-                        >
-                            <option>Cash</option>
-                            <option>Transfer Bank</option>
-                            <option>QR</option>
-                        </select>
-                    </div>
-
                     <div className="md:flex w-full mt-8">
                         <div className="flex flex-col w-full">
                             <label htmlFor="" className="text-xl mb-2">Nohp<span className="text-red-600">*</span></label>
                             <input
                                 className="border-2 h-12 w-full p-4 rounded-md"
                                 type="tel"
+                                required
                                 value={nohp}
                                 onChange={(e) => setNohp(e.target.value)}
                                 placeholder="08xxxxxxx"
@@ -333,6 +372,7 @@ Terima kasih.
                         <div className="flex flex-col w-full">
                             <label htmlFor="" className="text-xl mb-2">Catatan :</label>
                             <textarea
+                                required
                                 value={catatan}
                                 onChange={(e) => setCatatan(e.target.value)}
                                 className="border-2 h-32 w-full p-4 rounded-md"
@@ -341,12 +381,74 @@ Terima kasih.
                     </div>
                 </section>
                 <div className="mt-12 flex justify-end">
-                    <button
-                        type="button"
-                        onClick={handleSubmit}
-                        className={`w-full h-12 rounded-md bg-[#C9A882] text-white`}>
-                        Kirim
-                    </button>
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button
+                                disabled={!isFormComplete}
+                                className="w-full mt-6 bg-[#C9A882] hover:bg-[#B8956A] text-white h-12 rounded-md"
+                            >
+                                Pesan Sekarang!
+                            </Button>
+                        </DialogTrigger>
+
+                        <DialogContent className="w-md md:max-w-2xl min-h-75 rounded-2xl">
+                            <DialogHeader>
+                                <DialogTitle className="text-center">Detail Pesanan</DialogTitle>
+                            </DialogHeader>
+                            <section className="space-y-3 text-sm mt-4">
+                                <div className="border rounded-lg p-4 space-y-2">
+                                    <h3 className="font-semibold text-lg">Detail Treatment</h3>
+                                    <p><span className="font-medium">Treatment:</span> {namaTreatment || '-'}</p>
+                                    <p><span className="font-medium">Level:</span> {levelTreatment || '-'}</p>
+                                    <p><span className="font-medium">Durasi:</span> {durasiTreatment ? `${durasiTreatment} menit` : '-'}</p>
+                                    <p><span className="font-medium">Harga:</span> {hargaTreatment ? `Rp ${Number(hargaTreatment).toLocaleString('id-ID')}` : '-'}</p>
+                                </div>
+
+                                <div className="border rounded-lg p-4 space-y-2">
+                                    <h3 className="font-semibold text-lg">Data Pemesan</h3>
+                                    <p><span className="font-medium">Nama:</span> {namaPengunjung || '-'}</p>
+                                    <p><span className="font-medium">Gender:</span> {gender.length ? gender.join(', ') : '-'}</p>
+                                    <p><span className="font-medium">No HP:</span> {nohp || '-'}</p>
+                                    <p><span className="font-medium">Alamat:</span> {alamat || '-'}</p>
+                                    <p><span className="font-medium">Tanggal:</span> {date ? date.toLocaleDateString('id-ID') : '-'}</p>
+                                    <p><span className="font-medium">Jam:</span> {time || '-'}</p>
+                                    <p><span className="font-medium">Pembayaran:</span> {payment || '-'}</p>
+                                    {catatan && (
+                                        <p><span className="font-medium">Catatan:</span> {catatan}</p>
+                                    )}
+                                </div>
+                                <div>
+                                    <label className="text-lg font-medium">Metode Pembayaran</label>
+                                    <select
+                                        value={payment}
+                                        onChange={(e) => setPayment(e.target.value)}
+                                        className="w-full h-12 rounded-md border px-4 mt-2"
+                                    >
+                                        <option value="">Pilih metode pembayaran</option>
+                                        <option value="cash">Cash (Bayar di tempat)</option>
+                                        <option value="online">Online Payment (QRIS / Transfer / E-Wallet)</option>
+                                    </select>
+                                </div>
+                            </section>
+
+                            <div className="flex flex-col gap-y-2 mt-auto">
+                                <button
+                                    type="button"
+                                    onClick={handleOrder}
+                                    className={`w-full h-12 rounded-md bg-[#C9A882] text-white`}>
+                                    Pesan Sekarang!
+                                </button>
+                                <DialogClose asChild>
+                                    <button
+                                        type="button"
+                                        className="w-full h-12 rounded-md bg-black text-white"
+                                    >
+                                        Batal
+                                    </button>
+                                </DialogClose>
+                            </div>
+                        </DialogContent>
+                    </Dialog>
                 </div>
             </form>
         </>
