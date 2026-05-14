@@ -13,6 +13,7 @@ export default function BookingForm() {
   const level = searchParams.get("level") || "";
   const durasi = searchParams.get("durasi") || "";
   const harga = searchParams.get("harga") || "0";
+  const keluhan = searchParams.get("keluhan") || "";
 
   const [nama, setNama] = useState("");
   const [phone, setPhone] = useState("");
@@ -62,6 +63,7 @@ export default function BookingForm() {
             harga={harga}
             tanggal={tanggal}
             jam={jam}
+            keluhan={keluhan}
           />
         </div>
       </div>

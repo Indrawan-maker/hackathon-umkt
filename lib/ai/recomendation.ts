@@ -77,7 +77,7 @@ export async function recommendTreatment({
 
   const res: GroqResponse = await askGroq(
     [{ role: "user", content: prompt }],
-    SYSTEM_PROMPT
+    SYSTEM_PROMPT,
   );
 
   const content = res?.choices?.[0]?.message?.content || "";
@@ -93,7 +93,7 @@ export async function recommendTreatment({
     };
   }
 
-  // maoping kode ke data treatment
+  // cari data rreatemnt yg di rekomendasikan ai
   const selected = treatments.find((t) => t.kode === parsed.kode);
 
   if (!selected) {
