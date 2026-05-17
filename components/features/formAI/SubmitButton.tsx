@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { buildMessageToAdmin } from "@/lib/message/toAdmin";
+import { buildMessageToPelanggan } from "@/lib/message/toPelanggan";
 
 interface Props {
   nama: string;
@@ -53,59 +55,60 @@ export default function SubmitButton({
     setLoading(true);
 
     try {
-      // WA message
-      const message = `
-Halo Admin, saya ingin melakukan reservasi layanan spa melalui sistem rekomendasi AI. Berikut adalah detail pesanan saya:
-
-DATA PELANGGAN
-Nama: ${nama}
-Gender: ${gender}
-No HP: ${phone}
-Wilayah: ${lokasi}
-Alamat Detail: ${detailAlamat}
-${catatan ? `Catatan: ${catatan}` : ""}
-
-JADWAL KUNJUNGAN
-Tanggal: ${tanggal}
-Jam: ${jam} WITA
-
-DETAIL PERAWATAN
-Treatment: ${treatment}
-Level Tekanan: ${level}
-Durasi: ${durasi} menit
-
-INFORMASI PEMBAYARAN
-Total Harga: Rp ${harga}
-Metode: ${payment}
-
-Mohon konfirmasi ketersediaan terapis untuk jadwal di atas. Terima kasih!
-`.trim();
-
-      const whatsappUrl = `https://wa.me/6289689346487?text=${encodeURIComponent(
-        message
-      )}`;
-
-      const res = await fetch("/api/tips", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ keluhan }),
+      //wa ke admin
+      const messageToAdmin = buildMessageToAdmin({
+        nama,
+        gender,
+        phone,
+        lokasi,
+        detailAlamat,
+        catatan,
+        tanggal,
+        jam,
+        treatment,
+        level,
+        durasi,
+        harga,
+        payment,
       });
 
-      const data = await res.json();
+      const whatsappUrl = `https://wa.me/6289689346487?text=${encodeURIComponent(
+        messageToAdmin
+      )}`;
 
-      if (data.success && Array.isArray(data.data)) {
-        data.data.forEach((tip: string, i: number) => {
-          console.log(`${i + 1}. ${tip}`);
+      //chat tips jika ada keluhan
+      const hasKeluhan = keluhan && keluhan.trim().length > 0;
+
+      if (hasKeluhan) {
+        const res = await fetch("/api/tips", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ keluhan }),
         });
-      } else {
-        console.log("AI TIPS ERROR:", data);
+
+        const data = await res.json();
+
+        if (data.success && Array.isArray(data.data)) {
+          const customerMessage = buildMessageToPelanggan({ nama, tips: data.data });
+
+          fetch("/api/sendWA", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              phone,
+              message: customerMessage,
+              delay: 10000,
+            }),
+          });
+        }
       }
 
+      //  redirect ke wa
       window.location.href = whatsappUrl;
     } catch (err) {
       console.error("Gagal submit:", err);
 
-      const fallbackMessage = `
+      const fallback = `
 Halo Admin, saya ingin reservasi layanan spa.
 
 Nama: ${nama}
@@ -115,7 +118,7 @@ Jam: ${jam}
 
       window.location.href =
         "https://wa.me/6289689346487?text=" +
-        encodeURIComponent(fallbackMessage);
+        encodeURIComponent(fallback);
     } finally {
       setLoading(false);
     }
