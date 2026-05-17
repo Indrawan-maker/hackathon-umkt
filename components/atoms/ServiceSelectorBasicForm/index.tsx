@@ -27,7 +27,7 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { TREATMENTS } from "@/data/treatment"
 import { option } from "framer-motion/client"
 import CardDurasiHargaList from "@/components/moleculs/CardDurasiHargaList"
@@ -49,9 +49,22 @@ export default function ServiceSelectorBasicForm() {
     const timeRef = useRef<HTMLInputElement>(null)
 
     const dataDiriRef = useRef<HTMLDivElement>(null)
-    const cardListRef = useRef<HTMLDivElement>(null)
-    const dialogRef = useRef<HTMLButtonElement>(null)
 
+
+    useEffect(() => {
+        const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js";
+        const clientKey = process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY;
+
+        const script = document.createElement("script");
+        script.src = snapScript;
+        script.setAttribute("data-client-key", clientKey || "");
+        script.async = true;
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
 
     const scrollToDataDiri = () => {
         closeDialog()
@@ -86,24 +99,23 @@ export default function ServiceSelectorBasicForm() {
     }
 
     const generatePaymentLink = async () => {
-        const res = await fetch("/api/payment", {
+
+        const data = {
+            price: Number(hargaTreatment)
+        }
+
+        const response = await fetch("/api/payment", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                nama: namaPengunjung,
-                nohp,
-                treatment: namaTreatment,
-                total: Number(hargaTreatment),
-                payment,
-            }),
+            body: JSON.stringify(data)
         })
 
-        const data = await res.json()
+        const requestData = await response.json();
+        console.log({ requestData })
 
-        if (data.payment_url) {
-            window.open(data.payment_url, "_blank")
+        if (requestData.token && typeof requestData.token === 'string') {
+            window.snap.pay(requestData.token);
+        } else {
+            alert("Token tidak valid: " + JSON.stringify(requestData.token))
         }
     }
 
@@ -145,7 +157,13 @@ Terima kasih.
             return
         }
 
+        
+    closeDialog() 
+
+    setTimeout(async () => {
         await generatePaymentLink()
+    }, 300)
+
     }
 
     const handleCheckboxGender = (value: string) => {
