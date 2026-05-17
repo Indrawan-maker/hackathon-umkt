@@ -60,8 +60,8 @@ export function buildPrompt({
   keluhan,
   treatments,
 }: BuildPromptParams): string {
-  const treatmentText = treatments
-    .map((t) => `${t.kode} | ${t.nama} | ${t.level}`)
+  const treatmentList = treatments
+    .map((t) => `${t.kode} | ${t.nama} | ${t.level} | ${t.desc} `)
     .join("\n");
 
   return `Area: ${areas.join(", ")}
@@ -69,7 +69,7 @@ Level: ${level}
 Keluhan: ${keluhan}
 
 Treatment tersedia:
-${treatmentText}`;
+${treatmentList}`;
 }
 
 

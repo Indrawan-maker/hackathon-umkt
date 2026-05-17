@@ -1,12 +1,13 @@
 import type { Treatment } from "@/types/treatment";
 
 export const TREATMENTS: Treatment[] = [
-  // treatemnt kepala
+  // treatment kepala
   {
     kode: "A1",
     nama: "Totok & Pijat Kepala",
     area: "Kepala",
     level: "Lembut",
+    desc: "Fokus pada kepala untuk membantu relaksasi dan mengurangi ketegangan ringan.",
     harga: {
       30: 90000,
       60: 130000,
@@ -19,6 +20,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Aromaterapi Kulit Kepala",
     area: "Kepala",
     level: "Lembut",
+    desc: "Menggunakan aromaterapi untuk membantu menenangkan pikiran dan meredakan stres ringan.",
     harga: {
       30: 85000,
       60: 120000,
@@ -31,6 +33,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Relaksasi Kepala & Leher",
     area: "Kepala",
     level: "Normal",
+    desc: "Membantu mengurangi pegal pada kepala dan leher akibat aktivitas atau posisi duduk lama.",
     harga: {
       30: 95000,
       60: 135000,
@@ -43,6 +46,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Terapi Reda Migrain",
     area: "Kepala",
     level: "Keras",
+    desc: "Fokus mengurangi ketegangan kepala dan otot leher yang berkaitan dengan migrain.",
     harga: {
       30: 100000,
       60: 140000,
@@ -51,12 +55,13 @@ export const TREATMENTS: Treatment[] = [
     },
   },
 
-  // treatement kaki
+  // treatment kaki
   {
     kode: "D1",
     nama: "Refleksi Kaki",
     area: "Kaki",
     level: "Lembut",
+    desc: "Tekanan ringan pada titik refleksi kaki untuk membantu relaksasi tubuh.",
     harga: {
       30: 80000,
       60: 120000,
@@ -69,6 +74,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Pijat Kaki & Betis",
     area: "Kaki",
     level: "Normal",
+    desc: "Membantu meredakan pegal dan ketegangan pada kaki serta betis.",
     harga: {
       30: 95000,
       60: 135000,
@@ -81,6 +87,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Kombinasi Kaki & Refleksi",
     area: "Kaki",
     level: "Normal",
+    desc: "Gabungan pijat kaki dan refleksi untuk membantu melancarkan sirkulasi dan relaksasi.",
     harga: {
       30: 100000,
       60: 145000,
@@ -93,6 +100,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Terapi Otot Kaki Sport",
     area: "Kaki",
     level: "Keras",
+    desc: "Tekanan lebih dalam untuk membantu pemulihan otot kaki setelah aktivitas berat atau olahraga.",
     harga: {
       30: 110000,
       60: 150000,
@@ -107,6 +115,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Relaksasi Tangan & Lengan",
     area: "Tangan",
     level: "Lembut",
+    desc: "Membantu mengurangi rasa lelah dan pegal ringan pada tangan serta lengan.",
     harga: {
       30: 75000,
       60: 110000,
@@ -119,6 +128,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Pijat Lengan & Bahu",
     area: "Tangan",
     level: "Normal",
+    desc: "Fokus pada lengan dan bahu untuk membantu meredakan ketegangan otot.",
     harga: {
       30: 85000,
       60: 120000,
@@ -131,6 +141,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Kombinasi Lengan & Leher",
     area: "Tangan",
     level: "Normal",
+    desc: "Membantu mengurangi pegal pada area lengan dan leher akibat aktivitas harian.",
     harga: {
       30: 95000,
       60: 135000,
@@ -143,6 +154,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Tekanan Dalam Lengan & Bahu",
     area: "Tangan",
     level: "Keras",
+    desc: "Tekanan lebih kuat untuk membantu otot lengan dan bahu yang terasa sangat tegang.",
     harga: {
       30: 100000,
       60: 135000,
@@ -151,12 +163,13 @@ export const TREATMENTS: Treatment[] = [
     },
   },
 
-  // punggung
+  // treatment punggung
   {
     kode: "J1",
     nama: "Relaksasi Punggung",
     area: "Punggung",
     level: "Lembut",
+    desc: "Pijatan ringan pada punggung untuk membantu relaksasi dan mengurangi pegal ringan.",
     harga: {
       30: 95000,
       60: 125000,
@@ -169,6 +182,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Pijat Punggung & Pinggang",
     area: "Punggung",
     level: "Normal",
+    desc: "Membantu meredakan ketegangan pada punggung dan pinggang akibat aktivitas harian.",
     harga: {
       30: 105000,
       60: 140000,
@@ -181,6 +195,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Kombinasi Punggung & Bahu",
     area: "Punggung",
     level: "Normal",
+    desc: "Fokus pada punggung dan bahu untuk membantu mengurangi pegal serta ketegangan otot.",
     harga: {
       30: 115000,
       60: 150000,
@@ -193,6 +208,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Deep Tissue & Bekam",
     area: "Punggung",
     level: "Keras",
+    desc: "Kombinasi tekanan dalam dan bekam untuk membantu otot punggung yang sangat tegang.",
     harga: {
       30: 150000,
       60: 220000,
@@ -205,6 +221,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Kerokan & Pijat Dalam Punggung",
     area: "Punggung",
     level: "Keras",
+    desc: "Membantu mengurangi pegal berat pada punggung dengan tekanan lebih dalam dan kerokan.",
     harga: {
       30: 120000,
       60: 160000,
@@ -219,6 +236,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Relaksasi Upper Body",
     area: "Upper",
     level: "Lembut",
+    desc: "Relaksasi ringan untuk area bahu, leher, dan punggung atas.",
     harga: {
       30: 120000,
       60: 160000,
@@ -231,6 +249,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Aromaterapi Upper Body",
     area: "Upper",
     level: "Lembut",
+    desc: "Menggabungkan aromaterapi dan pijatan ringan untuk membantu tubuh lebih rileks.",
     harga: {
       30: 125000,
       60: 170000,
@@ -243,6 +262,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Pemulihan Upper Body",
     area: "Upper",
     level: "Normal",
+    desc: "Membantu mengurangi ketegangan pada bahu, leher, dan punggung atas.",
     harga: {
       30: 135000,
       60: 180000,
@@ -255,6 +275,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Kombinasi Kepala Punggung Bahu",
     area: "Upper",
     level: "Normal",
+    desc: "Fokus relaksasi pada kepala, bahu, dan punggung untuk membantu mengurangi pegal menyeluruh.",
     harga: {
       30: 145000,
       60: 190000,
@@ -267,6 +288,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Terapi Deep Tissue Upper",
     area: "Upper",
     level: "Keras",
+    desc: "Tekanan dalam pada area upper body untuk membantu mengurangi otot yang sangat tegang.",
     harga: {
       30: 160000,
       60: 210000,
@@ -279,6 +301,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Tekanan Pemulihan Otot Upper",
     area: "Upper",
     level: "Keras",
+    desc: "Membantu pemulihan otot upper body dengan tekanan lebih kuat dan fokus.",
     harga: {
       30: 170000,
       60: 225000,
@@ -287,12 +310,13 @@ export const TREATMENTS: Treatment[] = [
     },
   },
 
-  // tretment full badan
+  // treatment full badan
   {
     kode: "P1",
     nama: "Aromaterapi Full Body",
     area: "Full Badan",
     level: "Lembut",
+    desc: "Pijatan seluruh tubuh dengan aromaterapi untuk membantu relaksasi total.",
     harga: {
       30: 120000,
       60: 150000,
@@ -305,6 +329,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Pijat & Scrub Full Body",
     area: "Full Badan",
     level: "Normal",
+    desc: "Kombinasi pijat dan scrub untuk membantu relaksasi serta menyegarkan tubuh.",
     harga: {
       30: 130000,
       60: 160000,
@@ -317,6 +342,7 @@ export const TREATMENTS: Treatment[] = [
     nama: "Deep Massage & Kerokan Full Body",
     area: "Full Badan",
     level: "Keras",
+    desc: "Tekanan kuat dan kerokan untuk membantu meredakan pegal berat di seluruh tubuh.",
     harga: {
       30: 150000,
       60: 190000,

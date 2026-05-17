@@ -12,6 +12,6 @@ export async function POST(req: NextRequest) {
   }
 
   const result = await generateTips(keluhan);
-
+  console.log(result.data);
   return NextResponse.json(result);
 }
