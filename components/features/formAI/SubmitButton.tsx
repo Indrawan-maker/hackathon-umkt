@@ -21,6 +21,22 @@ interface Props {
   keluhan: string;
 }
 
+
+//buat klo user masukkan 08 auto berubah datanya jdi 628 
+export function normalizeTo62(phone: string) {
+  let cleaned = phone.replace(/\D/g, "");
+
+  if (cleaned.startsWith("0")) {
+    cleaned = "62" + cleaned.slice(1);
+  }
+
+  if (!cleaned.startsWith("62")) {
+    cleaned = "62" + cleaned;
+  }
+
+  return cleaned;
+}
+
 export default function SubmitButton({
   nama,
   phone,
@@ -88,14 +104,17 @@ export default function SubmitButton({
 
         const data = await res.json();
 
+        
+
         if (data.success && Array.isArray(data.data)) {
           const customerMessage = buildMessageToPelanggan({ nama, tips: data.data });
 
+          const formattedPhone = normalizeTo62(phone);
           fetch("/api/sendWA", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              phone,
+              phone: formattedPhone,
               message: customerMessage,
               delay: 10000,
             }),

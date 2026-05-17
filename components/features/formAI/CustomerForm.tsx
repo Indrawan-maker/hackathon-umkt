@@ -74,14 +74,12 @@ export default function CustomerForm({
 
   return (
     <>
-      {/* Jadwal */}
       <div className="mb-5">
         <h3 className="text-sm font-medium text-stone-800 mb-3">
           Jadwal Treatment
         </h3>
 
         <div className="grid grid-cols-2 gap-3">
-          {/* tanggal */}
           <div>
             <label className="text-xs text-stone-500 mb-1 block">
               Tanggal
@@ -97,7 +95,6 @@ export default function CustomerForm({
             />
           </div>
 
-          {/* jam */}
           <div>
             <label className="text-xs text-stone-500 mb-1 block">
               Jam
@@ -117,7 +114,6 @@ export default function CustomerForm({
         </div>
       </div>
 
-      {/* Data pelanggan */}
       <div className="mb-6">
         <h2 className="text-sm font-medium text-stone-800 mb-4">
           Data Pelanggan
@@ -125,7 +121,6 @@ export default function CustomerForm({
 
         <div className="space-y-4">
 
-          {/* nama */}
           <div>
             <label className="text-xs text-stone-500 mb-1 block">
               Nama
@@ -141,7 +136,6 @@ export default function CustomerForm({
             />
           </div>
 
-          {/* gender */}
           <div>
             <label className="text-xs text-stone-500 mb-1 block">
               Gender
@@ -158,7 +152,6 @@ export default function CustomerForm({
             </select>
           </div>
 
-          {/* alamat */}
           <div>
             <label className="text-xs text-stone-500 mb-1 block">
               Lokasi
@@ -181,7 +174,6 @@ export default function CustomerForm({
             </select>
           </div>
 
-          {/* detail alamat */}
           <div>
             <label className="text-xs text-stone-500 mb-1 block">
               Detail Alamat
@@ -196,7 +188,6 @@ export default function CustomerForm({
             />
           </div>
 
-          {/* nomor hp */}
           <div>
             <label className="text-xs text-stone-500 mb-1 block">
               Nomor HP
@@ -213,7 +204,6 @@ export default function CustomerForm({
             />
           </div>
 
-          {/* pembayaran */}
           <div>
             <label className="text-xs text-stone-500 mb-1 block">
               Metode Pembayaran
@@ -232,7 +222,6 @@ export default function CustomerForm({
             </select>
           </div>
 
-          {/* catatan */}
           <div>
             <label className="text-xs text-stone-500 mb-1 block">
               Catatan Tambahan
