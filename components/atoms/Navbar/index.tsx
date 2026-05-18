@@ -1,5 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { IoMenu } from "react-icons/io5";
+
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const navItems = [
   {
@@ -22,60 +31,117 @@ const navItems = [
 
 export default function Navbar() {
   return (
-    <header className=" top-0 left-0 z-50 w-full fixed">
-      <nav
+<header className="fixed top-0 left-0 z-50 w-full">
+  <nav
+    className="
+      flex
+      h-18
+      items-center
+      justify-between
+      border-b
+      border-border/20
+      bg-background/10
+      px-6
+      backdrop-blur-xl
+      shadow-[0_8px_32px_rgba(0,0,0,0.15)]
+    "
+  >
+    <Link href="/" className="flex items-center gap-4">
+      <Image
+        src="/images/logo.png"
+        alt="De Home Spa"
+        width={52}
+        height={52}
+      />
+
+      <h1
         className="
-          flex
-          h-18
-          w-full
-          items-center
-          justify-between
-          rounded-[6px]
-          border border-white/10
-          bg-white/10
-          px-8
-          backdrop-blur-xl
-          shadow-[0_8px_32px_rgba(0,0,0,0.15)]
+          text-2xl
+          font-extrabold
+          tracking-tight
+          text-white
         "
       >
-        <Link href="/" className="flex items-center gap-4">
-          <Image
-            src="/images/logo.png"
-            alt="De Home Spa Logo"
-            width={54}
-            height={54}
-            className="object-contain"
-          />
+        De Home Spa
+      </h1>
+    </Link>
 
-          <h1 className="text-[22px] font-bold tracking-tight text-white">
-            De Home Spa
-          </h1>
-        </Link>
+    <ul className="hidden items-center gap-12 md:flex">
+      {navItems.map((item) => (
+        <li key={item.label}>
+          <Link
+            href={item.href}
+            className="
+              text-base
+              font-semibold
+              tracking-tight
+              text-white
+              transition-all
+              duration-300
+              hover:opacity-70
+            "
+          >
+            {item.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
 
-        <ul className="hidden items-center gap-14 md:flex">
-          {navItems.map((item) => (
-            <li key={item.label}>
+    <div className="md:hidden">
+      <Sheet>
+        <SheetTrigger asChild>
+          <button
+            className="
+              flex
+              h-11
+              w-11
+              items-center
+              justify-center
+              text-white
+              transition-all
+              duration-300
+              hover:opacity-70
+            "
+          >
+            <IoMenu className="h-7 w-7" />
+          </button>
+        </SheetTrigger>
+
+        <SheetContent
+          side="right"
+          className="
+            border-border/20
+            bg-black/90
+            text-white
+            backdrop-blur-2xl
+          "
+        >
+          <div className="mt-12 ml-10 flex flex-col gap-8">
+            {navItems.map((item) => (
               <Link
+                key={item.label}
                 href={item.href}
                 className="
-                  text-[18px]
-                  font-medium
+                  text-2xl
+                  font-semibold
+                  tracking-tight
                   text-white
                   transition-all
                   duration-300
-                  hover:text-[#FFE1A8]
+                  hover:opacity-70
                 "
               >
                 {item.label}
               </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </header>
+            ))}
+          </div>
+        </SheetContent>
+      </Sheet>
+    </div>
+  </nav>
+</header>
   );
 }
-
 
 
 
