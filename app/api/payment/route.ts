@@ -1,52 +1,26 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server";
+import Midtrans from "midtrans-client";
 
-export async function POST(req: NextRequest) {
-  try {
-    const body = await req.json()
 
-    const serverKey = process.env.MIDTRANS_SERVER_KEY!
-    const encodedKey = Buffer.from(serverKey + ":").toString("base64")
+const snap = new Midtrans.Snap({
+  isProduction: false,
+  serverKey: process.env.SECRET_MIDTRANS_SERVER_KEY!,
+  clientKey: process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY!,
+})
 
-    const orderId = `SPA-${Date.now()}`
 
-    const payload = {
-      transaction_details: {
-        order_id: orderId,
-        gross_amount: body.total,
-      },
-      item_details: [
-        {
-          id: "spa-treatment",
-          name: body.treatment,
-          price: body.total,
-          quantity: 1,
-        },
-      ],
-      customer_details: {
-        first_name: body.nama,
-        phone: body.nohp,
-        email: `${body.nohp}@dehomespa.com`,
-      },
+export async function POST(request: NextRequest) {
+  const { price } = await request.json();
+  const orderId = `TOPUP-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
+  const parameter = {
+    transaction_details: {
+      order_id: orderId,
+      gross_amount: price,
     }
-
-    const response = await fetch("https://api.sandbox.midtrans.com/v1/payment-links", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Basic ${encodedKey}`,
-      },
-      body: JSON.stringify(payload),
-    })
-
-    const result = await response.json()
-
-    return NextResponse.json(result)
-  } catch (error) {
-    console.error(error)
-    return NextResponse.json(
-      { message: "Gagal membuat payment link" },
-      { status: 500 }
-    )
   }
+
+  const transaction = await snap.createTransaction(parameter)
+  console.log(transaction)
+  return NextResponse.json({ token: transaction.token })
 }
