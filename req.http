@@ -1,0 +1,9 @@
+### TEST FONNTE WA
+POST http://localhost:3000/api/sendWA
+Content-Type: application/json
+Authorization: process.env.FONNTE_API_KEY!
+
+{
+  "phone": "6281348726973",
+  "message": "tes 123"
+}

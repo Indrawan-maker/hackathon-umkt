@@ -103,7 +103,7 @@ export default function FlowShell() {
             />
           )}
           {step === 3 && result && (
-            <StepResult result={result} />
+            <StepResult result={result} keluhan={keluhan} />
           )}
         </div>
 

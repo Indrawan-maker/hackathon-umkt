@@ -52,7 +52,7 @@ export default function StepDurasi({
         disabled={!selected || loading}
         className="w-full py-3 rounded-2xl bg-stone-800 text-white text-sm font-medium hover:bg-stone-700 disabled:opacity-40 mb-3"
       >
-        {loading ? "Memproses..." : "Minta rekomendasi AI"}
+        {loading ? "Menganalisis..." : "Minta rekomendasi AI"}
       </button>
 
       <button

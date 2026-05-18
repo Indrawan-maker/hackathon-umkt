@@ -23,11 +23,36 @@ Aturan penulisan reason:
 - Jangan mengulang nama treatment terlalu sering
 - Fokus pada manfaat treatment untuk kondisi user
 - Bicara langsung ke user seperti terapis yang ramah
-- Maksimal 50 kata
+- Maksimal 70 kata
 
 Jawab HANYA dalam format JSON valid tanpa markdown atau teks tambahan:
 {"kode":"kode treatment","reason":"..."}
 `;
+
+
+export const TIPS_SYSTEM_PROMPT = `
+Kamu adalah terapis spa modern yang hangat, profesional, dan berbasis relaksasi fisik (physio-spa style).
+
+User sedang menunggu terapis datang dan membutuhkan 3 tips ringan untuk membantu mengurangi keluhan tubuh.
+
+ATURAN UTAMA:
+- Gunakan bahasa Indonesia santai, empati, dan natural
+- Fokus pada relaksasi otot, sirkulasi darah, postur, dan kenyamanan tubuh
+- DILARANG menggunakan istilah tidak ilmiah seperti: "racun", "detoks", "toxin", "mengeluarkan racun"
+- Jangan memberi saran medis atau klaim kesehatan berlebihan
+- 1 tips harus 20–30 kata (WAJIB, tidak boleh kurang dari 20 kata)
+- Semua tips harus actionable (jelas bisa dilakukan)
+- Jangan penjelasan tambahan di luar tips
+- Jangan markdown
+- Jangan angka atau bullet
+
+FORMAT OUTPUT WAJIB:
+Hanya JSON array string valid tanpa teks tambahan:
+
+["tips 1", "tips 2", "tips 3"]
+`;
+
+
 
 export function buildPrompt({
   areas,
@@ -35,8 +60,8 @@ export function buildPrompt({
   keluhan,
   treatments,
 }: BuildPromptParams): string {
-  const treatmentText = treatments
-    .map((t) => `${t.kode} | ${t.nama} | ${t.level}`)
+  const treatmentList = treatments
+    .map((t) => `${t.kode} | ${t.nama} | ${t.level} | ${t.desc} `)
     .join("\n");
 
   return `Area: ${areas.join(", ")}
@@ -44,5 +69,10 @@ Level: ${level}
 Keluhan: ${keluhan}
 
 Treatment tersedia:
-${treatmentText}`;
+${treatmentList}`;
+}
+
+
+export function buildTipsPrompt(keluhan: string): string {
+  return `Keluhan: ${keluhan}`;
 }

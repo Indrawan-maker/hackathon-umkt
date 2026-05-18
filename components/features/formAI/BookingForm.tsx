@@ -13,11 +13,13 @@ export default function BookingForm() {
   const level = searchParams.get("level") || "";
   const durasi = searchParams.get("durasi") || "";
   const harga = searchParams.get("harga") || "0";
+  const keluhan = searchParams.get("keluhan") || "";
 
   const [nama, setNama] = useState("");
   const [phone, setPhone] = useState("");
   const [gender, setGender] = useState("Laki-laki");
-  const [alamat, setAlamat] = useState("");
+  const [lokasi, setLokasi] = useState("");
+  const [detailAlamat, setDetailAlamat] = useState("");
   const [payment, setPayment] = useState("Cash");
   const [catatan, setCatatan] = useState("");
   const [tanggal, setTanggal] = useState("");
@@ -42,7 +44,8 @@ export default function BookingForm() {
             nama={nama} setNama={setNama}
             phone={phone} setPhone={setPhone}
             gender={gender} setGender={setGender}
-            alamat={alamat} setAlamat={setAlamat}
+            lokasi={lokasi} setLokasi={setLokasi}
+            detailAlamat={detailAlamat} setDetailAlamat={setDetailAlamat}
             payment={payment} setPayment={setPayment}
             catatan={catatan} setCatatan={setCatatan}
             tanggal={tanggal} setTanggal={setTanggal}
@@ -53,7 +56,8 @@ export default function BookingForm() {
             nama={nama}
             phone={phone}
             gender={gender}
-            alamat={alamat}
+            lokasi={lokasi}
+            detailAlamat={detailAlamat}
             payment={payment}
             catatan={catatan}
             treatment={treatment}
@@ -62,6 +66,7 @@ export default function BookingForm() {
             harga={harga}
             tanggal={tanggal}
             jam={jam}
+            keluhan={keluhan}
           />
         </div>
       </div>
