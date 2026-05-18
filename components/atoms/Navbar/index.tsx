@@ -60,6 +60,7 @@ export default function Navbar() {
           font-extrabold
           tracking-tight
           text-white
+          font-poppins
         "
       >
         De Home Spa
@@ -73,7 +74,8 @@ export default function Navbar() {
             href={item.href}
             className="
               text-base
-              font-semibold
+              font-poppins
+              font-medium
               tracking-tight
               text-white
               transition-all

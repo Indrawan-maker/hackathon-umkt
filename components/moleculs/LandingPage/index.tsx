@@ -3,6 +3,7 @@ import Hero from "@/components/atoms/Hero";
 import Navbar from "@/components/atoms/Navbar";
 import CardSpaList from "@/components/moleculs/SpaCardList";
 import ServiceSelector from "@/components/moleculs/ServiceSelector";
+import WhyChooseUs from "@/components/atoms/WhyChooseUs";
 
 
 export default function LandingPage() {
@@ -11,6 +12,7 @@ export default function LandingPage() {
     <>
     <Navbar />
     <Hero />
+    <WhyChooseUs/>
     <ServiceSelector />
     <CardSpaList />
     <Footer />

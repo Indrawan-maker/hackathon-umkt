@@ -53,7 +53,7 @@ export default function Hero() {
                             delay: 0.2,
                             duration: 0.7,
                         }}
-                        className=" text-5xl font-extrabold leading-[0.95] tracking-tight text-primary-foreground sm:text-6xl md:text-7xl lg:text-[72px]"
+                        className=" font-poppins text-5xl font-extrabold leading-[0.95] tracking-tight text-primary-foreground sm:text-6xl md:text-7xl lg:text-[72px]"
                     >
                         Kemudahan <br />
                         adalah kemewahan
@@ -66,7 +66,7 @@ export default function Hero() {
                             delay: 0.4,
                             duration: 0.7,
                         }}
-                        className="mt-6 max-w-full text-base leading-relaxed text-primary-foreground/90 sm:text-lg md:max-w-155 md:text-xl"
+                        className=" font-poppins mt-6 max-w-full text-base leading-relaxed text-primary-foreground/90 sm:text-lg md:max-w-155 md:text-xl"
                     >
                         Karena setiap tubuh memiliki cerita yang berbeda.
                         Temukan terapi yang dirancang khusus untuk Anda melalui
@@ -85,14 +85,14 @@ export default function Hero() {
                     >
                         <Link
                             href="#konsultasi"
-                            className=" rounded-full bg-[#B35811] px-7 py-3.5 text-center text-base font-semibold text-primary-foreground transition-all duration-300 hover:scale-105  md:px-9 md:py-4 md:text-xl "
+                            className="font-poppins rounded-full bg-[#B35811] px-7 py-3.5 text-center text-base font-semibold text-primary-foreground transition-all duration-300 hover:scale-105  md:px-9 md:py-4 md:text-xl "
                         >
                             Mulai Konsultasi AI
                         </Link>
 
                         <Link
                             href="#layanan"
-                            className=" rounded-full border-2 border-primary-foreground/80 bg-primary-foreground/5 px-7 py-3.5 text-center text-base font-semibold text-primary-foreground backdrop-blur-md transition-all duration-300 hover:bg-primary-foreground hover:text-[#B35811] md:px-9 md:py-4 md:text-xl"
+                            className=" font-poppins rounded-full border-2 border-primary-foreground/80 bg-primary-foreground/5 px-7 py-3.5 text-center text-base font-semibold text-primary-foreground backdrop-blur-md transition-all duration-300 hover:bg-primary-foreground hover:text-[#B35811] md:px-9 md:py-4 md:text-xl"
                         >
                             Lihat Layanan
                         </Link>
