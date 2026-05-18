@@ -1,25 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
+import StepBadan from "@/components/features/recomendationAI/StepBadan";
 import StepLevel from "@/components/features/recomendationAI/StepLevel";
 import StepKeluhan from "@/components/features/recomendationAI/StepKeluhan";
 import StepDurasi from "@/components/features/recomendationAI/StepDurasi";
 import StepResult from "@/components/features/recomendationAI/StepResult";
 import type { Result } from "@/types/flow";
 
+const idToLabel: Record<number, string> = {
+  1: "Kepala",
+  2: "Tangan",
+  3: "Punggung",
+  4: "Kaki",
+};
+
 export default function FlowShell() {
-  const searchParams = useSearchParams();
-  const areas = searchParams.get("areas")?.split(",") ?? [];
   const router = useRouter();
 
   const [step, setStep] = useState(0);
+  const [selectedBadan, setSelectedBadan] = useState<number[]>([]);
   const [selectedLevel, setSelectedLevel] = useState("");
   const [keluhan, setKeluhan] = useState("");
   const [selectedDur, setSelectedDur] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState("");
+
+  const areas = selectedBadan.map((id) => idToLabel[id]);
 
   const handleNext = () => setStep((s) => s + 1);
   const handleBack = () => setStep((s) => s - 1);
@@ -41,7 +50,7 @@ export default function FlowShell() {
       const data = await res.json();
       if (data.success) {
         setResult(data.data);
-        setStep(3);
+        setStep(4);
       } else {
         setError(data.message || "Terjadi kesalahan");
       }
@@ -52,62 +61,123 @@ export default function FlowShell() {
     }
   };
 
+  const STEPS = ["Area Tubuh", "Level", "Durasi", "Keluhan"];
+
   return (
-    <div className="min-h-screen bg-stone-50 flex items-center justify-center px-4 py-10">
-      <div className="w-full max-w-4xl">
+    <div className="min-h-screen bg-[#F5EFE6] flex flex-col items-center px-4 py-8">
 
-        <button
-          onClick={() => router.push("/#pilihAreaTubuh")}
-          className="mb-5 text-sm text-stone-500 hover:text-stone-800 transition"
-        >
-          ← Ganti area tubuh
-        </button>
-
-        {areas.length > 0 && (
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {areas.map((a) => (
-              <span
-                key={a}
-                className="px-3 py-1 rounded-full bg-stone-200 text-stone-700 text-xs"
-              >
-                {a}
-              </span>
-            ))}
-          </div>
+      <div className="text-center mb-6">
+        <h1 className="text-2xl font-semibold text-[#5C3D2E]">Rekomendasi AI</h1>
+        {step < 4 && (
+          <p className="text-sm text-[#9C7B6B] mt-1">
+            {step === 0 && "AI akan menyesuaikan rekomendasi berdasarkan area yang dipilih"}
+            {step === 1 && "Pilih level pijatan"}
+            {step === 2 && "Berapa lama sesi yang kamu inginkan"}
+            {step === 3 && "Ceritakan keluhanmu"}
+          </p>
         )}
+      </div>
 
-        <div className="bg-white border border-stone-200 rounded-3xl p-6 shadow-sm">
+      {step < 4 && (
+        <div className="flex items-center gap-0 mb-8">
+          {STEPS.map((label, i) => {
+            const isActive = i === step;
+            const isDone = i < step;
+            return (
+              <div key={label} className="flex items-center">
+                <div className="flex flex-col items-center">
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all
+                      ${isActive || isDone
+                        ? "bg-[#8B6B52] text-white"
+                        : "bg-white border border-[#C9A882] text-[#C9A882]"
+                      }`}
+                  >
+                    {i + 1}
+                  </div>
+                  <span
+                    className={`text-[10px] mt-1 w-16 text-center ${
+                      isActive || isDone ? "text-[#8B6B52] font-medium" : "text-[#C9A882]"
+                    }`}
+                  >
+                    {label}
+                  </span>
+                </div>
+
+                {i < STEPS.length - 1 && (
+                  <div
+                    className={`w-12 h-px mb-4 transition-all ${
+                      i < step ? "bg-[#8B6B52]" : "bg-[#D9C5B5]"
+                    }`}
+                  />
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      <div className="w-full max-w-4xl bg-white rounded-3xl shadow-sm overflow-hidden">
+        <div className="p-6">
           {step === 0 && (
+            <StepBadan
+              selected={selectedBadan}
+              onSelect={setSelectedBadan}
+              onNext={handleNext}
+            />
+          )}
+          {step === 1 && (
             <StepLevel
               selected={selectedLevel}
               onSelect={setSelectedLevel}
               onNext={handleNext}
             />
           )}
-          {step === 1 && (
+          {step === 2 && (
             <StepKeluhan
               value={keluhan}
               onChange={setKeluhan}
               onNext={handleNext}
-              onBack={handleBack}
             />
+            
+            
           )}
-          {step === 2 && (
+          {step === 3 && (
             <StepDurasi
               selected={selectedDur}
               onSelect={setSelectedDur}
               onSubmit={handleSubmit}
-              onBack={handleBack}
               loading={loading}
               error={error}
             />
           )}
-          {step === 3 && result && (
+          {step === 4 && result && (
             <StepResult result={result} keluhan={keluhan} />
           )}
         </div>
 
+        {step > 0 && step < 4 && (
+          <div className="px-6 pb-5 flex justify-between">
+            <button
+              onClick={handleBack}
+              className="text-sm text-[#9C7B6B] hover:text-[#5C3D2E] transition flex items-center gap-1"
+            >
+              ← Kembali
+            </button>
+          </div>
+        )}
+        {step === 0 && (
+          <div className="px-6 pb-5">
+            <button
+              onClick={() => router.push("/")}
+              className="text-sm text-[#9C7B6B] hover:text-[#5C3D2E] transition flex items-center gap-1"
+            >
+              ← Kembali ke beranda
+            </button>
+          </div>
+        )}
       </div>
+
     </div>
   );
 }

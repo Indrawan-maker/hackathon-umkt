@@ -2,10 +2,9 @@ interface Props {
   value: string;
   onChange: (val: string) => void;
   onNext: () => void;
-  onBack: () => void;
 }
 
-export default function StepKeluhan({ value, onChange, onNext, onBack }: Props) {
+export default function StepKeluhan({ value, onChange, onNext }: Props) {
   return (
     <div>
       <h2 className="text-lg font-semibold text-stone-800 mb-1">Keluhan</h2>
@@ -24,12 +23,6 @@ export default function StepKeluhan({ value, onChange, onNext, onBack }: Props) 
       </div>
 
       <div className="flex gap-3">
-        <button
-          onClick={onBack}
-          className="flex-1 py-3 rounded-2xl border border-stone-200 text-sm text-stone-600 hover:bg-stone-50"
-        >
-          Kembali
-        </button>
 
         <button
           onClick={onNext}

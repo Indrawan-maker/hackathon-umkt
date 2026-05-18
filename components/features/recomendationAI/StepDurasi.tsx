@@ -9,7 +9,6 @@ interface Props {
   selected: string;
   onSelect: (val: string) => void;
   onSubmit: () => void;
-  onBack: () => void;
   loading: boolean;
   error: string;
 }
@@ -18,7 +17,6 @@ export default function StepDurasi({
   selected,
   onSelect,
   onSubmit,
-  onBack,
   loading,
   error,
 }: Props) {
@@ -47,6 +45,7 @@ export default function StepDurasi({
         <p className="text-sm text-red-500 text-center mb-4">{error}</p>
       )}
 
+      
       <button
         onClick={onSubmit}
         disabled={!selected || loading}
@@ -55,12 +54,7 @@ export default function StepDurasi({
         {loading ? "Menganalisis..." : "Minta rekomendasi AI"}
       </button>
 
-      <button
-        onClick={onBack}
-        className="w-full py-3 rounded-2xl border border-stone-200 text-sm text-stone-600 hover:bg-stone-50"
-      >
-        Kembali
-      </button>
+
     </div>
   );
 }
