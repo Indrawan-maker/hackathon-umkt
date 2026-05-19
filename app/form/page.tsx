@@ -1,4 +1,4 @@
-import BookingForm from "@/components/features/formAI/BookingForm";
+import BookingForm from "@/components/features/Form/BookingForm";
 import { Suspense } from "react";
 
 export default function BookingFormPage() {
