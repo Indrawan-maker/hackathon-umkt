@@ -1,3 +1,7 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 import {
     BadgeDollarSign,
     House,
@@ -56,40 +60,104 @@ export const whyChooseUsItems = [
     },
 ];
 
+const fadeUp = {
+    initial: {
+        opacity: 0,
+        y: 40,
+    },
+    whileInView: {
+        opacity: 1,
+        y: 0,
+    },
+    transition: {
+        duration: 0.6,
+        ease: "easeOut" as const,
+    },
+    viewport: {
+        once: true,
+        amount: 0.2,
+    },
+};
+
+const staggerContainer = {
+    hidden: {},
+    show: {
+        transition: {
+            staggerChildren: 0.15,
+        },
+    },
+};
+
+const staggerItem = {
+    hidden: {
+        opacity: 0,
+        y: 30,
+    },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.6,
+            ease: "easeOut" as const,
+        },
+    },
+};
 
 export default function WhyChooseUs() {
     return (
         <section className=" w-full ">
 
             <div className="overall bg-[#FDF5E6] h-auto py-10 px-6 sm:px-10 md:px-20 lg:px-40 xl:px-60">
-                <div className="overall-content flex flex-col items-center justify-between gap-8 text-[#625144] font-poppins sm:flex-row sm:gap-4">
-                    {overallItems.map((item) => (
-                        <div key={item.heading} className="overallContent text-center">
+
+                <motion.div
+                    {...fadeUp}
+                    className="overall-content flex flex-col items-center justify-between gap-8 text-[#625144] font-poppins sm:flex-row sm:gap-4"
+                >
+                    {overallItems.map((item, index) => (
+                        <motion.div
+                            {...fadeUp}
+                            transition={{
+                                duration: 0.6,
+                                delay: index * 0.2,
+                                ease: "easeOut",
+                            }}
+                            key={item.heading}
+                            className="overallContent text-center"
+                        >
                             <h2 className="text-4xl font-extrabold sm:text-5xl md:text-[55px]">{item.heading}</h2>
                             <p className="text-base font-semibold sm:text-lg md:text-[20px]">{item.text}</p>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
+
             </div>
 
-            <div className="WhyChooseUs bg-[#E8D0A4] px-6 py-20 md:px-10 lg:px-20">
+            <div className="WhyChooseUs bg-[#E8D0A4] px-6 py-24 md:px-10 lg:px-20">
 
-                <div className="mb-16 text-center">
+                <motion.div
+                    {...fadeUp}
+                    className="mb-16 text-center"
+                >
                     <h2
                         className=" font-playfair text-[48px] font-medium tracking-tight text-[#7A5C45] md:text-5xl "
                     >
                         Kenapa Pilih Kami?
                     </h2>
-                </div>
+                </motion.div>
 
-                <div
+                <motion.div
+                    variants={staggerContainer}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.2 }}
                     className=" grid grid-cols-1 gap-12 text-center sm:grid-cols-2 lg:grid-cols-5 "
                 >
                     {whyChooseUsItems.map((item, index) => {
                         const Icon = item.icon;
 
                         return (
-                            <div
+                            <motion.div
+                                variants={staggerItem}
                                 key={item.heading}
                                 className=" relative flex flex-col items-center px-4 "
                             >
@@ -114,10 +182,10 @@ export default function WhyChooseUs() {
                                 >
                                     {item.text}
                                 </p>
-                            </div>
+                            </motion.div>
                         );
                     })}
-                </div>
+                </motion.div>
             </div>
         </section>
     )
