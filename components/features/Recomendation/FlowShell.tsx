@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import StepBadan from "@/features/recomendation/StepBadan";
-import StepLevel from "@/features/recomendation/StepLevel";
-import StepKeluhan from "@/features/recomendation/StepKeluhan";
-import StepDurasi from "@/features/recomendation/StepDurasi";
-import StepResult from "@/features/recomendation/StepResult";
+import StepBadan from "@/components/features/Recomendation/StepBadan";
+import StepLevel from "@/components/features/Recomendation/StepLevel";
+import StepKeluhan from "@/components/features/Recomendation/StepKeluhan";
+import StepDurasi from "@/components/features/Recomendation/StepDurasi";
+import StepResult from "@/components/features/Recomendation/StepResult";
 import type { Result } from "@/types/flow";
 
 const idToLabel: Record<number, string> = {

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import FlowShell from "@/features/recomendation/FlowShell";
+import FlowShell from "@/components/features/Recomendation/FlowShell";
 
 export default function FlowPage() {
   return (

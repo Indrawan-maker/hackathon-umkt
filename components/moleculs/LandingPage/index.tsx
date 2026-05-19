@@ -1,10 +1,10 @@
-import Footer from "@/components/atoms/Footer";
-import Hero from "@/components/atoms/Hero";
-import Navbar from "@/components/atoms/Navbar";
+import Footer from "@/components/layout/Footer";
+import Hero from "@/components/sections/Hero";
+import Navbar from "@/components/layout/Navbar";
 import CardSpaList from "@/components/moleculs/SpaCardList";
 import ServiceSelector from "@/components/moleculs/ServiceSelector";
-import WhyChooseUs from "@/components/atoms/WhyChooseUs";
-import About from "@/components/atoms/About";
+import WhyChooseUs from "@/components/sections/WhyChooseUs";
+import About from "@/components/sections/About";
 
 
 export default function LandingPage() {
