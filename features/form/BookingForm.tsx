@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import CustomerForm from "@/components/features/formAI/CustomerForm";
-import SubmitButton from "@/components/features/formAI/SubmitButton";
-import TreatmentDetail from "@/components/features/formAI/TreatmentDetail";
+import CustomerForm from "@/features/form/CustomerForm";
+import SubmitButton from "@/features/form/SubmitButton";
+import TreatmentDetail from "@/features/form/TreatmentDetail";
 
 export default function BookingForm() {
   const searchParams = useSearchParams();
