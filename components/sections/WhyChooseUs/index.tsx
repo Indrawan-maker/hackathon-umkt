@@ -107,11 +107,11 @@ export default function WhyChooseUs() {
     return (
         <section className=" w-full ">
 
-            <div className="overall bg-[#FDF5E6] h-auto py-10 px-6 sm:px-10 md:px-20 lg:px-40 xl:px-60">
+            <div className="overall bg-main h-auto py-10 px-6 sm:px-10 md:px-20 lg:px-40 xl:px-60">
 
                 <motion.div
                     {...fadeUp}
-                    className="overall-content flex flex-col items-center justify-between gap-8 text-[#625144] font-poppins sm:flex-row sm:gap-4"
+                    className="overall-content flex flex-col items-center justify-between gap-8 text-main font-poppins sm:flex-row sm:gap-4"
                 >
                     {overallItems.map((item, index) => (
                         <motion.div
@@ -132,14 +132,14 @@ export default function WhyChooseUs() {
 
             </div>
 
-            <div className="WhyChooseUs bg-[#E8D0A4] px-6 py-24 md:px-10 lg:px-20">
+            <div className="WhyChooseUs bg-second px-6 py-24 md:px-10 lg:px-20">
 
                 <motion.div
                     {...fadeUp}
                     className="mb-16 text-center"
                 >
                     <h2
-                        className=" font-playfair text-[48px] font-medium tracking-tight text-[#7A5C45] md:text-5xl "
+                        className=" font-playfair text-[48px] font-medium tracking-tight text-main md:text-5xl "
                     >
                         Kenapa Pilih Kami?
                     </h2>
@@ -167,12 +167,12 @@ export default function WhyChooseUs() {
                                     />
                                 )}
 
-                                <div className="mb-5 text-[#8B6A52]">
+                                <div className="mb-5 text-main">
                                     <Icon size={52} strokeWidth={1.8} />
                                 </div>
 
                                 <h3
-                                    className=" mb-3 text-2xl font-bold tracking-tight text-[#7A5C45]"
+                                    className=" mb-3 text-2xl font-bold tracking-tight text-main"
                                 >
                                     {item.heading}
                                 </h3>
