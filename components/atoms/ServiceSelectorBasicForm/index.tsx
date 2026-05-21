@@ -184,6 +184,7 @@ Terima kasih.
 
 
         setTimeout(() => {
+        if (!window.snap) return
             window.snap.pay(requestData.token, {
                 onSuccess: (result: MidtransResponse) => {
                     verifyPayment(result.order_id).then((isValid) => {

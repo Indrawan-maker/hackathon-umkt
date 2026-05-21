@@ -1,19 +1,50 @@
-// app/api/verify-payment/route.ts
+// app/api/webhook/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import Midtrans from "midtrans-client";
-
-const snap = new Midtrans.Snap({
-  isProduction: false,
-  serverKey: process.env.SECRET_MIDTRANS_SERVER_KEY!,
-  clientKey: process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY!,
-})
 
 export async function POST(request: NextRequest) {
-    const { order_id } = await request.json()
-    
     try {
-        const transaction = await snap.transaction.status(order_id)
-        console.log("Server verification:", transaction)
+        const { order_id } = await request.json()
+        
+        if (!order_id) {
+            return NextResponse.json({ 
+                error: "order_id is required" 
+            }, { status: 400 })
+        }
+
+        const serverKey = process.env.SECRET_MIDTRANS_SERVER_KEY
+        
+        if (!serverKey) {
+            console.error("SECRET_MIDTRANS_SERVER_KEY not found in env")
+            return NextResponse.json({ 
+                error: "Server configuration error" 
+            }, { status: 500 })
+        }
+
+        const auth = Buffer.from(`${serverKey}:`).toString("base64")
+        
+        const response = await fetch(
+            `https://api.sandbox.midtrans.com/v2/${order_id}/status`,
+            {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Basic ${auth}`
+                }
+            }
+        )
+        
+        if (!response.ok) {
+            const error = await response.text()
+            console.error("Midtrans API error:", error)
+            return NextResponse.json({ 
+                error: "Failed to verify payment",
+                details: error
+            }, { status: response.status })
+        }
+
+        const transaction = await response.json()
+        console.log("Midtrans response:", transaction)
         
         return NextResponse.json({
             transaction_status: transaction.transaction_status,
@@ -21,9 +52,10 @@ export async function POST(request: NextRequest) {
             gross_amount: transaction.gross_amount
         })
     } catch (error) {
-        console.error("Verification error:", error)
+        console.error("Webhook error:", error)
         return NextResponse.json({ 
-            error: "Verification failed" 
+            error: "Internal server error",
+            details: error instanceof Error ? error.message : "Unknown error"
         }, { status: 500 })
     }
 }
