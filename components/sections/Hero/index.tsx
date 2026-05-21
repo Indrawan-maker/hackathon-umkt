@@ -1,22 +1,13 @@
 
 "use client";
 
-import Link from "next/link";
+import Link from "next/link"
 import { motion } from "framer-motion";
 
 export default function Hero() {
     return (
         <main
-            className="
-    relative
-    flex
-    h-screen
-    items-center
-    overflow-hidden
-    bg-cover
-    bg-center
-    bg-no-repeat
-  "
+            className=" relative flex h-screen items-center overflow-hidden bg-cover bg-center bg-no-repeat"
             style={{
                 backgroundImage: "url('/images/bg-image.jpg')",
             }}
@@ -84,14 +75,14 @@ export default function Hero() {
                         className=" mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6 md:mt-12"
                     >
                         <Link
-                            href="#konsultasi"
-                            className="font-poppins rounded-full bg-[#B35811] px-7 py-3.5 text-center text-base font-semibold text-primary-foreground transition-all duration-300 hover:scale-105  md:px-9 md:py-4 md:text-xl "
+                            href="/flow"
+                            className=" font-poppins rounded-full bg-[#B35811] px-7 py-3.5 text-center text-base font-semibold text-primary-foreground transition-all duration-300 hover:scale-105  md:px-9 md:py-4 md:text-xl "
                         >
                             Mulai Konsultasi AI
                         </Link>
 
                         <Link
-                            href="#layanan"
+                            href="#"
                             className=" font-poppins rounded-full border-2 border-primary-foreground/80 bg-primary-foreground/5 px-7 py-3.5 text-center text-base font-semibold text-primary-foreground backdrop-blur-md transition-all duration-300 hover:bg-primary-foreground hover:text-[#B35811] md:px-9 md:py-4 md:text-xl"
                         >
                             Lihat Layanan

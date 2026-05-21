@@ -14,14 +14,17 @@ import {
 
 const overallItems = [
     {
+        id:1,
         heading: "1.200+",
         text: "Pelanggan Puas"
     },
     {
+        id:2,
         heading: "26",
         text: "Jenis Layanan"
     },
     {
+        id:3,
         heading: "4.8",
         text: "Rating Rata-rata"
     },
@@ -30,30 +33,35 @@ const overallItems = [
 
 export const whyChooseUsItems = [
     {
+        id: 1,
         icon: BadgeDollarSign,
         heading: "Harga Transparan",
         text: "Harga yang tertera adalah harga final tanpa ada biaya tambahan atau biaya tersembunyi lainnya.",
     },
 
     {
+        id: 2,
         icon: House,
         heading: "Datang Ke Rumah",
         text: "Nikmati layanan pijat berkualitas tanpa perlu keluar rumah; terapis kami akan datang langsung ke lokasi Anda.",
     },
 
     {
+        id: 3,
         icon: Sparkles,
         heading: "Saran Pijat Pintar",
         text: "Gunakan asisten pintar kami untuk menemukan jenis pijat yang paling tepat berdasarkan kebutuhan dan masalah tubuh Anda secara presisi.",
     },
 
     {
+        id: 4,
         icon: Calendar,
         heading: "Booking Mudah",
         text: "Sistem reservasi yang simpel dan cepat memungkinkan Anda memesan jadwal hanya dalam hitungan detik.",
     },
 
     {
+        id: 5,
         icon: UserRound,
         heading: "Profesional",
         text: "Terapis kami telah tersertifikasi dan berpengalaman dalam berbagai teknik pijat untuk hasil yang optimal.",
@@ -107,11 +115,11 @@ export default function WhyChooseUs() {
     return (
         <section className=" w-full ">
 
-            <div className="overall bg-[#FDF5E6] h-auto py-10 px-6 sm:px-10 md:px-20 lg:px-40 xl:px-60">
+            <div className="overall bg-main h-auto py-10 px-6 sm:px-10 md:px-20 lg:px-40 xl:px-60">
 
                 <motion.div
                     {...fadeUp}
-                    className="overall-content flex flex-col items-center justify-between gap-8 text-[#625144] font-poppins sm:flex-row sm:gap-4"
+                    className="overall-content flex flex-col items-center justify-between gap-8 text-main font-poppins sm:flex-row sm:gap-4"
                 >
                     {overallItems.map((item, index) => (
                         <motion.div
@@ -121,7 +129,7 @@ export default function WhyChooseUs() {
                                 delay: index * 0.2,
                                 ease: "easeOut",
                             }}
-                            key={item.heading}
+                            key={item.id}
                             className="overallContent text-center"
                         >
                             <h2 className="text-4xl font-extrabold sm:text-5xl md:text-[55px]">{item.heading}</h2>
@@ -132,14 +140,14 @@ export default function WhyChooseUs() {
 
             </div>
 
-            <div className="WhyChooseUs bg-[#E8D0A4] px-6 py-24 md:px-10 lg:px-20">
+            <div className="WhyChooseUs bg-second px-6 py-24 md:px-10 lg:px-20">
 
                 <motion.div
                     {...fadeUp}
                     className="mb-16 text-center"
                 >
                     <h2
-                        className=" font-playfair text-[48px] font-medium tracking-tight text-[#7A5C45] md:text-5xl "
+                        className=" font-playfair text-[48px] font-medium tracking-tight text-main md:text-5xl "
                     >
                         Kenapa Pilih Kami?
                     </h2>
@@ -158,7 +166,7 @@ export default function WhyChooseUs() {
                         return (
                             <motion.div
                                 variants={staggerItem}
-                                key={item.heading}
+                                key={item.id}
                                 className=" relative flex flex-col items-center px-4 "
                             >
                                 {index !== whyChooseUsItems.length - 1 && (
@@ -167,12 +175,12 @@ export default function WhyChooseUs() {
                                     />
                                 )}
 
-                                <div className="mb-5 text-[#8B6A52]">
+                                <div className="mb-5 text-main">
                                     <Icon size={52} strokeWidth={1.8} />
                                 </div>
 
                                 <h3
-                                    className=" mb-3 text-2xl font-bold tracking-tight text-[#7A5C45]"
+                                    className=" mb-3 text-2xl font-bold tracking-tight text-main"
                                 >
                                     {item.heading}
                                 </h3>
