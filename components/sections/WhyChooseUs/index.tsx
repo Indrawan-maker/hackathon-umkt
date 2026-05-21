@@ -30,30 +30,35 @@ const overallItems = [
 
 export const whyChooseUsItems = [
     {
+        id: 1,
         icon: BadgeDollarSign,
         heading: "Harga Transparan",
         text: "Harga yang tertera adalah harga final tanpa ada biaya tambahan atau biaya tersembunyi lainnya.",
     },
 
     {
+        id: 2,
         icon: House,
         heading: "Datang Ke Rumah",
         text: "Nikmati layanan pijat berkualitas tanpa perlu keluar rumah; terapis kami akan datang langsung ke lokasi Anda.",
     },
 
     {
+        id: 3,
         icon: Sparkles,
         heading: "Saran Pijat Pintar",
         text: "Gunakan asisten pintar kami untuk menemukan jenis pijat yang paling tepat berdasarkan kebutuhan dan masalah tubuh Anda secara presisi.",
     },
 
     {
+        id: 4,
         icon: Calendar,
         heading: "Booking Mudah",
         text: "Sistem reservasi yang simpel dan cepat memungkinkan Anda memesan jadwal hanya dalam hitungan detik.",
     },
 
     {
+        id: 5,
         icon: UserRound,
         heading: "Profesional",
         text: "Terapis kami telah tersertifikasi dan berpengalaman dalam berbagai teknik pijat untuk hasil yang optimal.",
@@ -158,7 +163,7 @@ export default function WhyChooseUs() {
                         return (
                             <motion.div
                                 variants={staggerItem}
-                                key={item.heading}
+                                key={item.id}
                                 className=" relative flex flex-col items-center px-4 "
                             >
                                 {index !== whyChooseUsItems.length - 1 && (

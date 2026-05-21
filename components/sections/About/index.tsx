@@ -1,7 +1,7 @@
 import Image from "next/image"
 import lulur from "@/public/images/aboutspa2.jpg"
-
-export default function about() {
+import ButtonReservasi from "@/components/ui/ButtonReservasi"
+export default function About() {
     return (
         <section className="bg-main">
             <div className="about2 w-full min-h-screen p-4 sm:p-8 lg:p-16">
@@ -14,9 +14,7 @@ export default function about() {
                             <div className="about-text font-poppins text-second text-[14px] sm:text-[15px] lg:text-base">
                                 Di de HOME SPA, kami percaya bahwa di tengah hiruk-pikuk dunia, bisa beristirahat dengan mudah adalah kemewahan sejati. Kami hadir memadukan kecanggihan digital dengan sentuhan tangan yang tulus untuk memberikan pengalaman relaksasi yang berbeda.
                             </div>
-                            <button className="mt-8 lg:mt-10 rounded-full bg-linear-to-r from-[#E3B45E] to-[#BD8622] px-8 lg:px-10 py-3.5 lg:py-4 font-poppins text-[14px] lg:text-[16px] font-semibold text-white shadow-lg transition hover:scale-[1.03]">
-                                Reservasi Sekarang
-                            </button>
+                            <ButtonReservasi>Reservasi Sekarang</ButtonReservasi>
                         </div>
                     </div>
 

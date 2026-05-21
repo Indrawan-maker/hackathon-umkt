@@ -6,6 +6,10 @@ import ServiceSelector from "@/components/moleculs/ServiceSelector";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import About from "@/components/sections/About";
 import Reservasi from "@/components/sections/Reservasi";
+import Lokasi from "@/components/sections/Lokasi";
+import Unggulan from "@/components/sections/Unggulan";
+import Testimoni from "@/components/sections/Testimoni";
+import FAQ from "@/components/sections/FAQ";
 
 
 export default function LandingPage() {
@@ -16,7 +20,11 @@ export default function LandingPage() {
     <Hero />
     <WhyChooseUs/>
     <About/>
+    <Lokasi/>
+    <Unggulan/>
+    <Testimoni/>
     <Reservasi/>
+    <FAQ/>
     <ServiceSelector />
     <CardSpaList />
     <Footer />
