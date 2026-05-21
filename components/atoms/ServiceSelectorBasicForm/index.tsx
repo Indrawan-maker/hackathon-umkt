@@ -70,16 +70,6 @@ export default function ServiceSelectorBasicForm() {
         }, 300)
     }
 
-    const isFormComplete =
-        namaTreatment &&
-        durasiTreatment &&
-        namaPengunjung.trim() &&
-        gender.length > 0 &&
-        alamat.trim() &&
-        date &&
-        time &&
-        nohp.trim()
-
     const openTimePicker = () => {
         timeRef.current?.focus()
         timeRef.current?.showPicker?.()
@@ -94,6 +84,87 @@ export default function ServiceSelectorBasicForm() {
             bubbles: true,
         })
         document.dispatchEvent(escapeEvent)
+    }
+    const handleCheckboxGender = (value: string) => {
+        setGender((prev) =>
+            prev.includes(value)
+                ? prev.filter((item) => item !== value)
+                : [...prev, value])
+    }
+
+    const isFormComplete =
+        namaTreatment &&
+        durasiTreatment &&
+        namaPengunjung.trim() &&
+        gender.length > 0 &&
+        alamat.trim() &&
+        date &&
+        time &&
+        nohp.trim()
+
+
+
+    const message = `
+Form Reservasi De Home SPA
+
+*Data Pelanggan*
+Nama: ${namaPengunjung}
+Gender: ${gender}
+Alamat: ${alamat}
+No HP: ${nohp}
+Tanggal: ${date}
+Jam: ${time}
+Metode Pembayaran: ${payment}
+${catatan ? `Catatan: ${catatan}` : ""}
+
+*Detail Treatment*
+Treatment: ${namaTreatment}
+Level: ${levelTreatment}
+Durasi: ${durasiTreatment} menit
+Harga: ${hargaTreatment}
+
+Terima kasih.
+`.trim();
+
+
+
+    const handleSubmit = (messageText?: string) => {
+        const textToSend = messageText || message
+        console.log("Sending message:", textToSend)
+
+        const waUrl = `https://wa.me/6289689346487?text=${encodeURIComponent(textToSend)}`
+        setTimeout(() => {
+            try {
+                const win = window.open(waUrl, "_blank", "noopener,noreferrer")
+                if (!win) {
+                    console.warn("Popup blocked, trying fallback...")
+                    window.location.href = waUrl
+                } else {
+                    console.log("WA window opened")
+                }
+            } catch (error) {
+                console.error("Error opening WA:", error)
+                window.location.href = waUrl
+            }
+        }, 100)
+    }
+
+    const verifyPayment = async (orderId: string) => {
+        try {
+            const response = await fetch('/api/webhook', {
+                method: 'POST',
+                body: JSON.stringify({ order_id: orderId })
+            })
+            const data = await response.json()
+
+            console.log("Verifikasi response:", data)
+
+            return data.transaction_status === 'settlement' ||
+                data.transaction_status === 'capture'
+        } catch (error) {
+            console.error("Verifikasi error:", error)
+            return false
+        }
     }
 
 
@@ -111,7 +182,6 @@ export default function ServiceSelectorBasicForm() {
         })
         const requestData = await response.json()
 
-        // Gunakan object dengan onSuccess, bukan function biasa
 
         setTimeout(() => {
             window.snap.pay(requestData.token, {
@@ -126,7 +196,6 @@ export default function ServiceSelectorBasicForm() {
                             })
 
                             setTimeout(() => {
-                                // Pass message langsung, jangan tunggu state update
                                 const messageContent = `
 Form Reservasi De Home SPA
 
@@ -156,16 +225,14 @@ Terima kasih.
                         }
                     })
                 },
-                onPending: (result: MidtransResponse) => {
-                    console.log("⏳ Pending", result)
+                onPending: () => {
                     setShowToast(true)
                     toast.warning("Transaksi dibatalkan", {
                         duration: 5000,
                     })
 
                 },
-                onError: (result: MidtransResponse) => {
-                    console.log("❌ Error", result)
+                onError: () => {
                     toast.error("Terjadi kesalahan. Hubungi segera hubungi admin")
                     setIsPaymentSuccess(false)
                 },
@@ -179,79 +246,13 @@ Terima kasih.
         }, 100)
     }
 
-    const verifyPayment = async (orderId: string) => {
-        try {
-            const response = await fetch('/api/webhook', {
-                method: 'POST',
-                body: JSON.stringify({ order_id: orderId })
-            })
-            const data = await response.json()
-
-            console.log("Verifikasi response:", data)
-
-            // Status yang valid untuk dianggap "berhasil"
-            return data.transaction_status === 'settlement' ||
-                data.transaction_status === 'capture'
-        } catch (error) {
-            console.error("Verifikasi error:", error)
-            return false
-        }
-    }
-
-
-    const message = `
-Form Reservasi De Home SPA
-
-*Data Pelanggan*
-Nama: ${namaPengunjung}
-Gender: ${gender}
-Alamat: ${alamat}
-No HP: ${nohp}
-Tanggal: ${date}
-Jam: ${time}
-Metode Pembayaran: ${payment}
-${catatan ? `Catatan: ${catatan}` : ""}
-
-*Detail Treatment*
-Treatment: ${namaTreatment}
-Level: ${levelTreatment}
-Durasi: ${durasiTreatment} menit
-Harga: ${hargaTreatment}
-
-Terima kasih.
-`.trim();
-
-    const handleSubmit = (messageText?: string) => {
-        const textToSend = messageText || message
-        console.log("Sending message:", textToSend)
-
-        const waUrl = `https://wa.me/6289689346487?text=${encodeURIComponent(textToSend)}`
-        setTimeout(() => {
-            try {
-                const win = window.open(waUrl, "_blank", "noopener,noreferrer")
-                if (!win) {
-                    console.warn("Popup blocked, trying fallback...")
-                    // Fallback: arah ke WA
-                    window.location.href = waUrl
-                } else {
-                    console.log("✅ WA window opened")
-                }
-            } catch (error) {
-                console.error("Error opening WA:", error)
-                window.location.href = waUrl
-            }
-        }, 100)
-    }
-
-
     const handleOrder = async () => {
         if (!payment) {
-            alert("Pilih metode pembayaran")
+            toast.warning('pilih metode pembayaran')
             return
         }
 
         if (payment === "cash") {
-            // Langsung ke WA tanpa payment
             const messageContent = `
 Form Reservasi De Home SPA
 
@@ -296,12 +297,7 @@ Terima kasih.
         }
     }
 
-    const handleCheckboxGender = (value: string) => {
-        setGender((prev) =>
-            prev.includes(value)
-                ? prev.filter((item) => item !== value)
-                : [...prev, value])
-    }
+
     return (
         <>
             <form action="">

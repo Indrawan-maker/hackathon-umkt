@@ -21,6 +21,8 @@ import { useEffect, useState } from "react";
 import { buildMessageToAdmin } from "@/lib/message/toAdmin";
 import { buildMessageToPelanggan } from "@/lib/message/toPelanggan";
 import { useRouter } from "next/navigation";
+import { MidtransResponse } from "@/types/snap-payment";
+import { toast } from "sonner";
 
 interface Props {
   nama: string;
@@ -76,21 +78,8 @@ export default function SubmitButton({
 
 
 
-  useEffect(() => {
-    const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js";
-    const clientKey = process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY;
-
-    const script = document.createElement("script");
-    script.src = snapScript;
-    script.setAttribute("data-client-key", clientKey || "");
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-  const handleSubmit = async () => {
+ 
+  const handleSubmitToAdmin = async () => {
     if (
       !nama.trim() ||
       !phone.trim() ||
@@ -141,6 +130,7 @@ export default function SubmitButton({
 
 
         if (data.success && Array.isArray(data.data)) {
+
           const customerMessage = buildMessageToPelanggan({ nama, tips: data.data });
 
           const formattedPhone = normalizeTo62(phone);
@@ -177,78 +167,155 @@ Jam: ${jam}
     }
   };
 
-  const closeDialog = () => {
-    const escapeEvent = new KeyboardEvent('keydown', {
-      key: 'Escape',
-      code: 'Escape',
-      keyCode: 27,
-      which: 27,
-      bubbles: true,
-    })
-    document.dispatchEvent(escapeEvent)
-  }
 
-  const handlePayment = async () => {
-    if (!window.snap) {
-      alert("Midtrans belum siap")
-      return
-    }
-    const data = {
-      price: harga,
-    }
-    const response = await fetch('/api/payment', {
-      method: 'POST',
-      body: JSON.stringify(data)
-    })
-
-    localStorage.setItem(
-      "order",
-      JSON.stringify({
-        status: "pending",
-      })
-    )
-
-    const requestData = await response.json()
-    window.snap.pay(requestData.token, {
-          {
-        onSuccess: (result) => {
-          router.push("/thanks")
-        },
-
-        onPending: (result) => {
-          router.push("/pending")
-        },
-
-        onError: (result) => {
-          router.push("/failed-payment")
-        },
-      }
+    const closeDialog = () => {
+        const escapeEvent = new KeyboardEvent('keydown', {
+            key: 'Escape',
+            code: 'Escape',
+            keyCode: 27,
+            which: 27,
+            bubbles: true,
         })
-}
-
-const handleOrder = async () => {
-  if (!payment) {
-    alert("Pilih metode pembayaran")
-    return
-  }
-
-  if (payment === "cash") {
-    handleSubmit()
-    return
-  }
-
-  if (payment === "online") {
-    closeDialog()
-    setTimeout(() => {
-      handlePayment()
-    }, 200)
-
-    return
-  }
+        document.dispatchEvent(escapeEvent)
+    }
+        const message = `
+Form Reservasi De Home SPA
 
 
-  closeDialog()
-}
+Terima kasih.
+`.trim();
+
+    const handleSubmit = (messageText?: string) => {
+        const textToSend = messageText || message
+        console.log("Sending message:", textToSend)
+
+        const waUrl = `https://wa.me/6289689346487?text=${encodeURIComponent(textToSend)}`
+        setTimeout(() => {
+            try {
+                const win = window.open(waUrl, "_blank", "noopener,noreferrer")
+                if (!win) {
+                    window.location.href = waUrl
+                }
+            } catch (error) {
+                console.error("Error opening WA:", error)
+                window.location.href = waUrl
+            }
+        }, 100)
+    }
+
+    const verifyPayment = async (orderId: string) => {
+        try {
+            const response = await fetch('/api/webhook', {
+                method: 'POST',
+                body: JSON.stringify({ order_id: orderId })
+            })
+            const data = await response.json()
+
+            return data.transaction_status === 'settlement' ||
+                data.transaction_status === 'capture'
+        } catch (error) {
+            return false
+        }
+    }
+
+
+    const handlePayment = async () => {
+        if (!window.snap) {
+            alert("Midtrans belum siap")
+            return
+        }
+
+        closeDialog()
+        const response = await fetch('/api/payment', {
+            method: 'POST',
+            body: JSON.stringify({ price: harga })
+        })
+        const requestData = await response.json()
+
+        setTimeout(() => {
+            window.snap.pay(requestData.token, {
+                onSuccess: (result: MidtransResponse) => {
+                    verifyPayment(result.order_id).then((isValid) => {
+                        if (isValid) {
+
+                            toast.success("Pembayaran berhasil!", {
+                                duration: 5000
+                            })
+
+                            setTimeout(() => {
+                                const messageContent = `
+Form Reservasi De Home SPA
+
+*Data Pelanggan*
+
+
+Terima kasih.
+`.trim()
+
+                                handleSubmit(messageContent)
+                            }, 500)
+                        } else {
+                            toast.error("Pembayaran gagal verifikasi")
+                        }
+                    })
+                },
+                onPending: () => {
+                    toast.warning("Transaksi dibatalkan", {
+                        duration: 5000,
+                    })
+
+                },
+                onError: () => {
+                    toast.error("Terjadi kesalahan. Hubungi segera hubungi admin")
+                },
+                onClose: () => {
+                    toast.warning("Transaksi dibatalkan", {
+                        duration: 10000,
+                    })
+                    console.log("Modal ditutup")
+                }
+            })
+        }, 100)
+    }
+
+
+    const handleOrder = async () => {
+        if (!payment) {
+            toast.warning('pilih metode pembayaran')
+            return
+        }
+
+        if (payment === "cash") {
+            const messageContent = `
+Form Reservasi De Home SPA
+
+*Data Pelanggan*
+
+
+Terima kasih.
+`.trim()
+
+            closeDialog()
+
+            setTimeout(() => {
+                toast.success("Pesanan berhasil! Mengarahkan ke WhatsApp...", {
+                    duration: 2000
+                })
+
+                setTimeout(() => {
+                    handleSubmit(messageContent)
+                }, 500)
+            }, 300)
+            return
+        }
+
+        if (payment === "online") {
+            setTimeout(() => {
+                handlePayment()
+            }, 200)
+            return
+        }
+    }
 
 return (
   <Dialog>
