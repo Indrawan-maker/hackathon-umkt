@@ -11,7 +11,6 @@ export function buildMessageToAdmin({
   level,
   durasi,
   harga,
-  payment,
 }: {
   nama: string;
   gender: string;
@@ -25,7 +24,6 @@ export function buildMessageToAdmin({
   level: string;
   durasi: string;
   harga: string;
-  payment: string;
 }) {
   return `
 Halo Admin, saya ingin melakukan reservasi layanan spa melalui sistem rekomendasi AI. Berikut adalah detail pesanan saya:
@@ -49,7 +47,6 @@ Durasi: ${durasi} menit
 
 INFORMASI PEMBAYARAN
 Total Harga: Rp ${harga}
-Metode: ${payment}
 
 Mohon konfirmasi ketersediaan terapis untuk jadwal di atas. Terima kasih!
 `.trim();

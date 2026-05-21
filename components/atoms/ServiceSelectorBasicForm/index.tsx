@@ -1,7 +1,6 @@
 "use client"
 
 import { Calendar } from "@/components/ui/calendar"
-
 import {
     Popover,
     PopoverContent,
@@ -31,8 +30,20 @@ import { useEffect, useRef, useState } from "react"
 import { TREATMENTS } from "@/data/treatment"
 import { option } from "framer-motion/client"
 import CardDurasiHargaList from "@/components/moleculs/CardDurasiHargaList"
+import { toast } from "sonner"
 
 
+interface MidtransResponse {
+    status_code: string
+    status_message: string
+    transaction_id: string
+    order_id: string
+    gross_amount: string
+    payment_type: string
+    transaction_time: string
+    transaction_status: string
+    fraud_status: string
+}
 export default function ServiceSelectorBasicForm() {
     const [namaTreatment, setNamaTreatment] = useState('')
     const [levelTreatment, setLevelTreatment] = useState('')
@@ -47,24 +58,10 @@ export default function ServiceSelectorBasicForm() {
     const [date, setDate] = useState<Date | undefined>();
     const [time, setTime] = useState("");
     const timeRef = useRef<HTMLInputElement>(null)
+    const [isPaymentSuccess, setIsPaymentSuccess] = useState(false)
+    const [showToast, setShowToast] = useState(false)
 
     const dataDiriRef = useRef<HTMLDivElement>(null)
-
-
-    useEffect(() => {
-        const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js";
-        const clientKey = process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY;
-
-        const script = document.createElement("script");
-        script.src = snapScript;
-        script.setAttribute("data-client-key", clientKey || "");
-        script.async = true;
-        document.body.appendChild(script);
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
 
     const scrollToDataDiri = () => {
         closeDialog()
@@ -85,8 +82,9 @@ export default function ServiceSelectorBasicForm() {
 
     const openTimePicker = () => {
         timeRef.current?.focus()
-        timeRef.current?.showPicker?.() // bonus (Chrome mobile/desktop)
+        timeRef.current?.showPicker?.()
     }
+
     const closeDialog = () => {
         const escapeEvent = new KeyboardEvent('keydown', {
             key: 'Escape',
@@ -98,31 +96,38 @@ export default function ServiceSelectorBasicForm() {
         document.dispatchEvent(escapeEvent)
     }
 
-    const generatePaymentLink = async () => {
 
-        const data = {
-            price: Number(hargaTreatment)
+
+    const handlePayment = async () => {
+        if (!window.snap) {
+            alert("Midtrans belum siap")
+            return
         }
 
-        const response = await fetch("/api/payment", {
-            method: "POST",
-            body: JSON.stringify(data)
+        closeDialog()
+        const response = await fetch('/api/payment', {
+            method: 'POST',
+            body: JSON.stringify({ price: hargaTreatment })
         })
+        const requestData = await response.json()
 
-        const requestData = await response.json();
-        console.log({ requestData })
+        // Gunakan object dengan onSuccess, bukan function biasa
 
-        if (requestData.token && typeof requestData.token === 'string') {
-            window.snap.pay(requestData.token);
-        } else {
-            alert("Token tidak valid: " + JSON.stringify(requestData.token))
-        }
-    }
+        setTimeout(() => {
+            window.snap.pay(requestData.token, {
+                onSuccess: (result: MidtransResponse) => {
+                    verifyPayment(result.order_id).then((isValid) => {
+                        if (isValid) {
+                            console.log("✅ Pembayaran terverifikasi")
+                            setIsPaymentSuccess(true)
 
+                            toast.success("Pembayaran berhasil!", {
+                                duration: 5000
+                            })
 
-
-    const handleSubmit = () => {
-        const message = `
+                            setTimeout(() => {
+                                // Pass message langsung, jangan tunggu state update
+                                const messageContent = `
 Form Reservasi De Home SPA
 
 *Data Pelanggan*
@@ -142,10 +147,103 @@ Durasi: ${durasiTreatment} menit
 Harga: ${hargaTreatment}
 
 Terima kasih.
-    `.trim();
+`.trim()
 
-        window.open(`https://wa.me/6289689346487?text=${encodeURIComponent(message)}`, "_blank");
-    };
+                                handleSubmit(messageContent)
+                            }, 500)
+                        } else {
+                            toast.error("Pembayaran gagal verifikasi")
+                        }
+                    })
+                },
+                onPending: (result: MidtransResponse) => {
+                    console.log("⏳ Pending", result)
+                    setShowToast(true)
+                    toast.warning("Transaksi dibatalkan", {
+                        duration: 5000,
+                    })
+
+                },
+                onError: (result: MidtransResponse) => {
+                    console.log("❌ Error", result)
+                    toast.error("Terjadi kesalahan. Hubungi segera hubungi admin")
+                    setIsPaymentSuccess(false)
+                },
+                onClose: () => {
+                    toast.warning("Transaksi dibatalkan", {
+                        duration: 10000,
+                    })
+                    console.log("Modal ditutup")
+                }
+            })
+        }, 100)
+    }
+
+    const verifyPayment = async (orderId: string) => {
+        try {
+            const response = await fetch('/api/webhook', {
+                method: 'POST',
+                body: JSON.stringify({ order_id: orderId })
+            })
+            const data = await response.json()
+
+            console.log("Verifikasi response:", data)
+
+            // Status yang valid untuk dianggap "berhasil"
+            return data.transaction_status === 'settlement' ||
+                data.transaction_status === 'capture'
+        } catch (error) {
+            console.error("Verifikasi error:", error)
+            return false
+        }
+    }
+
+
+    const message = `
+Form Reservasi De Home SPA
+
+*Data Pelanggan*
+Nama: ${namaPengunjung}
+Gender: ${gender}
+Alamat: ${alamat}
+No HP: ${nohp}
+Tanggal: ${date}
+Jam: ${time}
+Metode Pembayaran: ${payment}
+${catatan ? `Catatan: ${catatan}` : ""}
+
+*Detail Treatment*
+Treatment: ${namaTreatment}
+Level: ${levelTreatment}
+Durasi: ${durasiTreatment} menit
+Harga: ${hargaTreatment}
+
+Terima kasih.
+`.trim();
+
+    const handleSubmit = (messageText?: string) => {
+        const textToSend = messageText || message
+        console.log("Sending message:", textToSend)
+
+        const waUrl = `https://wa.me/6289689346487?text=${encodeURIComponent(textToSend)}`
+        setTimeout(() => {
+            try {
+                const win = window.open(waUrl, "_blank", "noopener,noreferrer")
+                if (!win) {
+                    console.warn("Popup blocked, trying fallback...")
+                    // Fallback: arah ke WA
+                    window.location.href = waUrl
+                } else {
+                    console.log("✅ WA window opened")
+                }
+            } catch (error) {
+                console.error("Error opening WA:", error)
+                window.location.href = waUrl
+            }
+        }, 100)
+    }
+
+
     const handleOrder = async () => {
         if (!payment) {
             alert("Pilih metode pembayaran")
@@ -153,17 +251,49 @@ Terima kasih.
         }
 
         if (payment === "cash") {
-            handleSubmit()
+            // Langsung ke WA tanpa payment
+            const messageContent = `
+Form Reservasi De Home SPA
+
+*Data Pelanggan*
+Nama: ${namaPengunjung}
+Gender: ${gender}
+Alamat: ${alamat}
+No HP: ${nohp}
+Tanggal: ${date}
+Jam: ${time}
+Metode Pembayaran: ${payment}
+${catatan ? `Catatan: ${catatan}` : ""}
+
+*Detail Treatment*
+Treatment: ${namaTreatment}
+Level: ${levelTreatment}
+Durasi: ${durasiTreatment} menit
+Harga: ${hargaTreatment}
+
+Terima kasih.
+`.trim()
+
+            closeDialog()
+
+            setTimeout(() => {
+                toast.success("Pesanan berhasil! Mengarahkan ke WhatsApp...", {
+                    duration: 2000
+                })
+
+                setTimeout(() => {
+                    handleSubmit(messageContent)
+                }, 500)
+            }, 300)
             return
         }
 
-        
-    closeDialog() 
-
-    setTimeout(async () => {
-        await generatePaymentLink()
-    }, 300)
-
+        if (payment === "online") {
+            setTimeout(() => {
+                handlePayment()
+            }, 200)
+            return
+        }
     }
 
     const handleCheckboxGender = (value: string) => {
@@ -439,15 +569,15 @@ Terima kasih.
 
                                 <div>
                                     <label className="text-lg font-medium">Metode Pembayaran</label>
-                                    <select
-                                        value={payment}
-                                        onChange={(e) => setPayment(e.target.value)}
-                                        className="w-full h-12 rounded-md border px-4 mt-2"
-                                    >
-                                        <option value="">Pilih metode pembayaran</option>
-                                        <option value="cash">Cash (Bayar di tempat)</option>
-                                        <option value="online">Online Payment (QRIS / Transfer / E-Wallet)</option>
-                                    </select>
+                                    <Select value={payment} onValueChange={setPayment}>
+                                        <SelectTrigger className="w-full h-12 border-2 bg-transparent">
+                                            <SelectValue placeholder="Pilih metode pembayaran" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="cash">Cash (Bayar di tempat)</SelectItem>
+                                            <SelectItem value="online">Online Payment (QRIS / Transfer / E-Wallet)</SelectItem>
+                                        </SelectContent>
+                                    </Select>
                                 </div>
                             </section>
 
