@@ -14,14 +14,17 @@ import {
 
 const overallItems = [
     {
+        id:1,
         heading: "1.200+",
         text: "Pelanggan Puas"
     },
     {
+        id:2,
         heading: "26",
         text: "Jenis Layanan"
     },
     {
+        id:3,
         heading: "4.8",
         text: "Rating Rata-rata"
     },
@@ -126,7 +129,7 @@ export default function WhyChooseUs() {
                                 delay: index * 0.2,
                                 ease: "easeOut",
                             }}
-                            key={item.heading}
+                            key={item.id}
                             className="overallContent text-center"
                         >
                             <h2 className="text-4xl font-extrabold sm:text-5xl md:text-[55px]">{item.heading}</h2>
