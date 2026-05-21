@@ -16,15 +16,15 @@ const navItems = [
     href: "#testimonial",
   },
   {
-    label: "Layanan",
+    label: "Lokasi",
     href: "#layanan",
   },
   {
-    label: "Blog",
+    label: "Layanan",
     href: "#blog",
   },
   {
-    label: "Contact",
+    label: "FAQ",
     href: "#contact",
   },
 ];
@@ -67,7 +67,7 @@ export default function Navbar() {
       </h1>
     </Link>
 
-    <ul className="hidden items-center gap-12 md:flex">
+    <ul className="hidden items-center gap-12 md:flex pr-10">
       {navItems.map((item) => (
         <li key={item.label}>
           <Link
@@ -89,7 +89,7 @@ export default function Navbar() {
       ))}
     </ul>
 
-    <div className="md:hidden">
+    <div className="md:hidden ">
       <Sheet>
         <SheetTrigger asChild>
           <button
